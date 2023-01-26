@@ -1,0 +1,35 @@
+.html-block {
+  & .wp-block-table {
+    line-height: normal;
+    & figcaption {
+      padding-top: 15px;
+    }
+    & table,
+    th,
+    td {
+      border-color: #0038d2;
+      table-layout: auto;
+      min-width: 500px;
+    }
+    @include breakpoint(md) {
+      & table,
+      th,
+      td {
+        border-collapse: collapse;
+        border-color: #0038d2;
+        min-width: auto;
+      }
+    }
+  }
+  & .test-html {
+    font-size: calc(1.425rem + 2.1vw);
+    margin-bottom: 0.5rem;
+  }
+  & ul,
+  ol {
+    padding-left: 18px;
+  }
+  & iframe {
+    width: 100%;
+  }
+}

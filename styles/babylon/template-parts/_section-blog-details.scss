@@ -1,0 +1,44 @@
+.section-post-header {
+  padding-top: 52px;
+  & .arrow {
+    margin-bottom: 10px;
+    @include breakpoint(md) {
+      margin-bottom: 0px;
+      padding-left: 20px;
+      padding-top: 11px;
+
+    }
+  }
+  & .post-meta {
+    color: $secondary;
+  }
+  & .social-icons {
+    padding-bottom: 33px;
+  }
+}
+.quote-block {
+  
+  .col-10 {
+    position: relative;
+}
+  & .wp-block-quote {
+    & p {
+      // padding-left: 10px;
+      color: var(--bs-gray-600);
+    }
+    & cite {
+      // padding-left: 10px;
+      color: $secondary;
+    }
+  }
+  @include breakpoint(md) {
+    & .wp-block-quote {
+      & p {
+        // padding-left: 25px;
+      }
+      & cite {
+        // padding-left: 25px;
+      }
+    }
+  }
+}

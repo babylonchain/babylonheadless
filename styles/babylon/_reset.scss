@@ -1,0 +1,30 @@
+pre {
+  background: #424242;
+  display: block;
+  color: #ffffff;
+  code {
+    font-size: inherit;
+    color: inherit;
+    word-break: normal;
+  }
+}
+code {
+  background: #424242;
+  display: block;
+  padding: rem-calc(16);
+}
+ul,
+ol {
+  ul {
+    margin-left: rem-calc(25);
+  }
+  ol {
+    margin-left: rem-calc(25);
+  }
+}
+
+figcaption {
+  text-align: center;
+  padding: rem-calc(5 0);
+  color: $gray-600;
+}

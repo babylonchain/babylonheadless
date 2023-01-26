@@ -1,0 +1,68 @@
+.sidebar{
+    &.widget-area {
+        .widget {
+            margin-bottom:50px;
+            .widget-title {
+                margin-bottom:30px;
+            }
+            a {
+                color: $black;
+                &:hover {
+                    @extend .text-primary;
+                }
+            }
+            ul {
+                li {
+                    font-size:20px;
+                    @include breakpoint(lg) {
+                        font-size:24px;
+                    }
+                }
+            }
+            &:last-of-type {
+                margin-bottom:0;
+            }
+        }
+    }
+}
+
+.sidebar-widget {
+    margin-bottom: 40px;
+    h4 {
+        border-bottom: 1px solid rgba($gray, 0.2);
+        padding-bottom: 11px;
+        margin: 0;
+    }
+    &__item {
+        height: 0;
+        opacity: 1;
+        visibility: visible;
+        transition: all 0.5s ease;
+        overflow: hidden;
+    }
+    .icon {
+        line-height: 0;
+    }
+    .term-lists {
+        margin: 0;
+        padding: 16px 0 0 0;
+        &__item {
+            margin-bottom: 25px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            &:hover, &.active {
+                color: $accent;
+            }
+        }
+    }
+    &.toggle-hide {
+        .sidebar-widget__item {
+
+            opacity: 0;
+            visibility: hidden;
+        }
+        .icon {
+            transform: rotate(180deg);
+        }
+    }
+}

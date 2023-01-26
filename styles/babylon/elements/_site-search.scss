@@ -1,0 +1,72 @@
+.site-search-overlay {
+    display:none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom:0;
+    left: 0;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.9);
+    margin: 0;
+    z-index:11;
+    &:before {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+      margin-right: 0;
+      
+    }
+    &-content {
+        @include xy_center;
+        width:90%;
+        @include breakpoint(md) {
+            width: 600px;
+        }
+        #search-box {
+            width: 100%;
+            .form-control {
+                background:$white;
+            }
+        }
+    }
+    .close-btn{
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        cursor: pointer;
+        img, svg {
+            width: 30px;
+            height: 30px;
+        }
+        .logged-in.admin-bar & {
+           top: 46px + 16px;
+            @include breakpoint(lg) {
+                top: 32px + 16px;
+            }
+        }
+    }
+
+}
+
+
+.search-form {
+    @extend .d-flex;
+    @extend .flex-wrap;
+    @extend .justify-content-center;
+    label {
+        margin-bottom:0;
+        width: calc(100% - 80px);
+    }
+    .search-submit {
+        padding: 7px 12px;
+        min-width:auto;
+        width:80px;
+    }
+}
+
+
+
+
+
+

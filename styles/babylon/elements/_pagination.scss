@@ -1,0 +1,120 @@
+.nav-links {
+  // @extend .d-flex;
+  // @extend .align-items-center;
+  // @extend .justify-content-between;
+  // @extend .flex-wrap;
+  // @extend .mt-5;
+  & > div {
+    width: 50%;
+  }
+  .icon-wrapper {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 20px;
+    background: $primary;
+    border-radius: 50%;
+    @include transition(all 0.5s ease);
+    @include breakpoint(lg) {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 30px;
+    }
+    &:hover {
+      background: darken($primary, 8);
+    }
+    svg {
+      width: 24px;
+      height: 24px;
+      margin-right: -7px;
+      @include breakpoint(lg) {
+        width: 34px;
+        height: 34px;
+        margin-right: -10px;
+      }
+    }
+  }
+  a {
+    // @extend .text-dark;
+    span {
+      border: none;
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .nav-next {
+    // @extend .text-right;
+    .icon-wrapper {
+      svg {
+        @include transform(rotate(180deg));
+        margin-right: 0px;
+        margin-left: -7px;
+        @include breakpoint(lg) {
+          margin-left: -10px;
+        }
+      }
+    }
+  }
+}
+
+.md-webinar {
+  &__pagination {
+    justify-content: center;
+    @include breakpoint(md) {
+      justify-content: left;
+    }
+    & li {
+      display: flex;
+    }
+
+    & .page-link {
+      background-color: #fff;
+      color: #0038d2;
+      border: 0;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 31px;
+      padding-left: 8px;
+      padding-right: 8px;
+      @include breakpoint(md) {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      &:focus {
+        box-shadow: none;
+      }
+      &:hover {
+        color: #35daa3;
+      }
+    }
+
+    .active > span {
+      cursor: default;
+      color: #35daa3;
+    }
+
+    & .prev-btn {
+      margin-right: 0;
+      cursor: pointer;
+      @include breakpoint(lg) {
+        margin-right: 61px;
+      }
+
+      &:hover {
+        filter: invert(77%) sepia(54%) saturate(558%) hue-rotate(98deg)
+          brightness(90%) contrast(89%);
+      }
+    }
+    & .next-btn {
+      margin-left: 0;
+      cursor: pointer;
+      @include breakpoint(lg) {
+        margin-left: 61px;
+      }
+      &:hover {
+        filter: invert(77%) sepia(54%) saturate(558%) hue-rotate(98deg)
+          brightness(90%) contrast(89%);
+      }
+    }
+  }
+}

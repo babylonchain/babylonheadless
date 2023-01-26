@@ -1,0 +1,7 @@
+.heading-block {
+    margin-top: 15px;
+    @include breakpoint(lg) {
+        margin-top: 25px;
+
+    }
+}

@@ -1,0 +1,67 @@
+// guttnerburge default button
+$btn-bg: var(--primary);
+.wp-block-button {
+  &__link {
+    background-color: $btn-bg;
+    color: $white !important;
+    font-size: $font-size-base;
+    line-height: 1.5;
+    padding: rem-calc(7 12);
+    font-weight: 500;
+    min-width: 150px;
+    @include transition;
+  }
+  &.is-style-outline {
+    .wp-block-button__link {
+      padding: rem-calc(5 12);
+      border-color: var(--primary);
+      color: var(--primary);
+      &:hover {
+        background-color: var(--primary);
+        color: $white;
+      }
+    }
+  }
+}
+
+// theme button
+.btn {
+  min-width: 150px;
+  &-rounded {
+    border-radius: 10px;
+  }
+  &-primary {
+  }
+  &-secondary {
+  }
+  &-light {
+    background-color: $white;
+    color: $dark;
+    &:hover {
+      background-color: $accent !important;
+    }
+  }
+  &-lg {
+  }
+  &-sm {
+  }
+  &-outline {
+    &-primary {
+    }
+    &-secondary {
+    }
+  }
+}
+
+.carousel__button {
+  min-width: 36px;
+}
+
+.loading-wrapper {
+}
+.loading-btn {
+  span {
+    display: inline-block;
+    margin-left: 15px;
+  }
+}

@@ -1,0 +1,18 @@
+@import 'wp-block-quote';
+@import 'wp-block-pullquote';
+@import 'wp-block-table';
+@import 'wp-block-image';
+@import 'wp-block-audio';
+@import 'wp-block-video';
+@import 'wp-block-file';
+@import 'wp-block-columns';
+@import 'wp-block-heading';
+
+.wp-core-block {
+    .container {
+        .container {
+            max-width:100%;
+            padding:0px;
+        }
+    }
+}

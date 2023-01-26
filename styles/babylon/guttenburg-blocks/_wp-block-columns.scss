@@ -1,0 +1,25 @@
+.wp-block-columns {
+    &.has-separator {
+        .wp-block-column {
+            @include breakpoint(lg) {
+                padding: 0 20px;
+                border-right:1px solid $light;
+                border-left:1px solid $light;
+                margin-left:0 !important;
+            }
+            @include breakpoint(xl) {
+                padding: 0 100px;
+            }
+
+            &:first-child {
+                padding-left:0;
+                border-left:0;
+            }
+            &:last-child {
+                padding-right:0;
+                border-right:0;
+            }
+
+        }
+    }
+}

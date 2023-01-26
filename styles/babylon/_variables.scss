@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/*------------------------------
+Replace Default font verible
+>> copy veriable from bootstrap/veriable.scss
+*/
+$theme-colors: (
+  "primary": #00f0ff,
+  "secondary": #0038d2,
+  "blue": #0038d2,
+  "cyan": #35daa3,
+  "gray": #333333,
+  "body-color": #333333,
+);
+$accent: rgba(53, 218, 163, 1);
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1134px,
+  xxl: 1134px,
+);
+$font-family-base: "Outfit", sans-serif;
+
+/*Colors*/
+
+$primary: #00f0ff;
+$secondary: #0038d2;
+// $success:      #28a745;
+// $info:          #17a2b8;
+// $warning:       #ffc107;
+// $danger:        #ff3b30;
+// $light:         #eff0f0;
+$dark: rgba(0, 56, 210, 1);
+$gray: #333333;
+$body-color: $gray;
+$line-height-base: 2;
+
+// $display1-size: 96px;
+$h1-font-size: 80px;
+$h2-font-size: 48px;
+$h3-font-size: 25px;
+// $h4-font-size: 26px;
+$h5-font-size: 16px;
+// $h6-font-size: 16px;
+// $headings-line-height: 32px;
+
+$btn-padding-y: 9px;
+$btn-padding-x: 24px;
+$btn-font-size: 16px;
+
+$btn-padding-y-lg: 12px;
+$btn-padding-x-lg: 24px;
+$btn-font-size-lg: 19px;
+
+$btn-padding-y-sm: 2px;
+$btn-padding-x-sm: 24px;
+$btn-font-size-sm: 16px;
+
+$btn-border-radius: 8px;
+$btn-border-radius-sm: 8px;
+$btn-border-radius-lg: 10px;
+
+$link-color: $dark;
+$link-hover-color: $accent;
+
+// Header
+$headerHeight: 108px;
+
+// secitons
+$secondary-bg: #eaf3ff;
+
+$primary-dark: $dark;
+$accent: #35daa3;
+$primary: #00f0ff;
+$gradient1: linear-gradient(90deg, #683fce 0%, #4f83ca 100%);
+$gradient2: linear-gradient(90.24deg, #032ea5 0.21%, #2e529c 99.78%);
+//$gradient3 : background: linear-gradient(66.52deg, #431075 -89.69%, #421788 -47%, #4126B1 51.97%, #412DC2 104.36%); background-blend-mode: overlay;

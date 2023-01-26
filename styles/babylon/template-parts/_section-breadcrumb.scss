@@ -1,0 +1,47 @@
+.react-breadcrum {
+  & .breadcrumb {
+    & .breadcrumb-item {
+      color: #000000;
+      & a {
+        text-decoration: none;
+        color: #000000;
+        &:hover {
+          color: $accent;
+        }
+      }
+    }
+  }
+}
+.career-sidebar {
+  & .arrow {
+    padding-top: 0;
+  }
+}
+.breadcrumb {
+  margin-left: -8px;
+}
+.breadcrumb-item {
+  padding-left: 8px;
+  &::before {
+    display: none;
+  }
+  &::after {
+    color: #000000;
+    content: var(--bs-breadcrumb-divider, ">");
+    padding: 0 10px;
+  }
+  &.active {
+    &::after {
+      content: '|';
+    }
+  }
+  &:last-child {
+    &::after {
+      display: none;
+    }
+  }
+}
+// .breadcrumb-item + .breadcrumb-item + .meta-item:before {
+//   color: #000000;
+//   content: var(--bs-breadcrumb-divider, "|");
+// }

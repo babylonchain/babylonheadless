@@ -1,0 +1,24 @@
+.quote-block {
+  padding: 40px;
+  svg.quote-icon {
+    position: absolute;
+    top: 0px;
+    font-size: 40px;
+    color: var(--bs-cyan);
+  }
+}
+blockquote,
+.wp-block-quote {
+  border-left: 0;
+  padding: rem-calc(0 0 0 64);
+  margin: 0 0;
+  cite {
+    font-size: rem-calc(14);
+  }
+  p {
+    padding-left: 0;
+    &:last-child {
+      margin: 0;
+    }
+  }
+}

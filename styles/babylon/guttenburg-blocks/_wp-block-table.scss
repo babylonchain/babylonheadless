@@ -1,0 +1,22 @@
+.wp-block-table {
+    table {
+        
+        
+        td, th {
+            border-top: 1px solid #dee2e6;
+            padding: rem-calc(12);
+        }
+        th {
+            font-weight:700;
+            border-bottom: 1px solid #dee2e6;
+        }
+        tr {
+            &:first-child {
+                td {
+                   font-weight:700;
+                }
+            }
+        }
+    }
+   
+}

@@ -1,0 +1,37 @@
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="color"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="range"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+input[type="range"],
+input[type="file"],
+textarea {
+  @extend .form-control;
+}
+[type="reset"],
+[type="submit"],
+button,
+html [type="button"] {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.custom-select {
+  height: 40px;
+  &.custom-select-sm {
+    height: 37px;
+  }
+  &.custom-select-lg {
+    height: 48px;
+  }
+}

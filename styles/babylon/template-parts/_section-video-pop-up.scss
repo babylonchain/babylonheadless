@@ -1,0 +1,76 @@
+.section-video-popup {
+  background: linear-gradient(180deg, #0038d2 0%, #002ba0 100%);
+  background-size: cover;
+  background-position: bottom center;
+  padding: 50px 0;
+  position: relative;
+  min-height: 267px;
+  @include breakpoint(lg) {
+    height: 682px;
+  }
+  @include breakpoint(xl) {
+    // height: 724px;
+  }
+  .banner-image {
+    margin: 0 0 30px 0;
+    @include breakpoint(lg) {
+      margin: 0;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      max-width: 60%;
+    }
+  }
+  .section-content {
+    max-width: 376px;
+    color: $white;
+    position: relative;
+    z-index: 2;
+    h1 {
+      margin-bottom: 0;
+      font-weight: 500;
+      font-size: 56px;
+      line-height: 64px;
+      letter-spacing: -0.01em;
+      @include breakpoint(lg) {
+        font-size: 80px;
+        line-height: 88px;
+      }
+    }
+    .desc {
+      margin-top: 35px;
+      margin-bottom: 0;
+      font-size: 16px;
+      line-height: 31px;
+    }
+    .btn-wrapper {
+      margin-top: 42px;
+      .btn {
+        min-width: 254px;
+      }
+    }
+    .video-button-wrapper {
+      margin-top: 42px;
+      text-align: center;
+      @include breakpoint(md) {
+        margin-top: 0px;
+        @include y_center;
+        right: -36px;
+      }
+      @include breakpoint(lg) {
+        margin-top: 0px;
+        @include y_center;
+        right: -126px-98;
+      }
+      a {
+        color: white;
+        display: block;
+        &:hover {
+          color: $accent;
+        }
+      }
+    }
+  }
+}

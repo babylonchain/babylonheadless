@@ -1,0 +1,165 @@
+.form-wrapper {
+  .form-title {
+    display: none;
+  }
+  & .gf-label {
+    color: $dark;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 24px;
+  }
+  & input,
+  textarea {
+    border: 1px solid $dark;
+    border-radius: 0;
+    height: 63px;
+  }
+  & textarea {
+    height: 144px;
+  }
+  & input[type="phone"] {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 2;
+    color: #333333;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid $dark;
+    height: 63px;
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 0 0.25rem rgb(0 240 255 /25%);
+    }
+  }
+  & .form-fields {
+    margin-bottom: 45px;
+    & .form-field {
+      margin-bottom: 34px;
+    }
+    & .error {
+      & .error-message {
+        color: red;
+      }
+    }
+  }
+  & .footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    & button {
+      background-color: $dark;
+      color: white;
+      border: none;
+      padding: 10px 102px;
+      @include breakpointMax(md) {
+        width: 100%;
+      }
+      &:hover {
+        color: white;
+        background-color: $accent;
+      }
+      &:focus {
+        background: linear-gradient(to right, #683fce 100%, #4f83ca 100%);
+        border: transparent;
+        position: relative;
+        width: 255px;
+        height: 52px;
+        z-index: 0;
+        color: white;
+        &:before {
+          content: "";
+          position: absolute;
+          background: $accent;
+          width: 249px;
+          height: 46px;
+          top: 3px;
+          left: 3px;
+          border-radius: 8px;
+          z-index: -1;
+        }
+      }
+    }
+  }
+
+  & .fileupload {
+    position: relative;
+    & button {
+      // margin-top: -22px;
+      // margin-left: 12px;
+      background-color: white;
+      border: 1.5px solid $dark;
+      color: $dark;
+      text-transform: capitalize;
+      @include breakpoint(md) {
+        // margin-top: 10px;
+        // margin-left: 12px;
+      }
+      &:hover {
+        color: white;
+        background-color: $accent;
+        border: 2px solid $accent;
+      }
+    }
+    & span {
+      padding-left: 0px;
+    }
+    & .fileUpload {
+      border: 1.5px solid $dark;
+      padding: 10px;
+
+      & button {
+        margin-top: 0;
+        margin-left: 0;
+        background-color: white;
+        border: 1.5px solid $dark;
+        color: $dark;
+      }
+      & .no-file {
+        padding-left: 16px;
+        color: #828282;
+      }
+    }
+    & .description {
+      color: #bdbdbd;
+    }
+    .fileUpload + div:not(.description) {
+      margin-top: 15px;
+      padding: 10px;
+      border: 1.5px solid transparent;
+      @include breakpoint(md) {
+        margin-top: 0px;
+        position: absolute;
+        top: 32px;
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+      }
+    }
+
+    .fileUpload + div span {
+      display: block;
+      margin-top: 5px;
+      @include breakpoint(md) {
+        margin-top: 0px;
+        margin-left: auto;
+        margin-right: 10px;
+        text-align: right;
+        width: calc(100% - 170px);
+        display: flex;
+        align-self: center;
+      }
+    }
+  }
+  & .form-confirmation {
+    text-align: center;
+    color: $dark;
+    font-size: 40px;
+    line-height: 1.2;
+  }
+  & .form-error {
+    color: red;
+  }
+}

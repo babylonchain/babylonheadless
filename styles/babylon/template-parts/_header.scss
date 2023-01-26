@@ -1,0 +1,192 @@
+.header {
+    
+    position: relative;
+    .header-inner {
+        // position: relative;
+        padding: 22px 0;
+        .logo-wrapper {
+            @include breakpointMax(xl) {
+                max-width: calc(100% - 64px);
+            }
+            img {
+                max-height: 65px;
+            }
+        }
+    }
+    .nav-opener {
+        width: 44px;
+        min-width: auto;
+        padding-left: 0;
+        padding-right: 0;
+        border-radius: 100%;
+        line-height: 0;
+        height: 44px;
+        font-size: 24px;
+        color: $dark;
+    }
+
+    .header-nav {
+        width: 100%;
+        @include breakpoint(xl) {
+            width: 75%;
+        }
+        @include breakpointMax(xl) {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            transform: translateY(0px);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 5;
+            padding-left: calc(calc(100vw - 960px + 24px)/2);
+            padding-right: calc(calc(100vw - 960px + 24px)/2);
+            transition: transform 0.35s ease;
+
+        }
+        @include breakpointMax(lg) {
+            padding-left: calc(calc(100vw - 720px + 24px)/2);
+            padding-right: calc(calc(100vw - 720px + 24px)/2);
+        }
+        @include breakpointMax(md) {
+            padding-left: calc(calc(100vw - 540px + 24px)/2);
+            padding-right: calc(calc(100vw - 540px + 24px)/2);
+        }
+        @include breakpointMax(sm) {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        &.menu-open {
+            transform: translateY(20px);
+            opacity: 1;
+            visibility: visible;
+        }
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: right;
+            @include breakpointMax(xl) {
+                padding-bottom: 30px;
+                
+            }
+            
+            & > li {
+                position: relative;
+                &:not(:first-child) {
+                    @include breakpoint(xl) {
+                        margin-left: 34px;
+                    }
+                }
+                .sub-menu {
+                    margin: 0;
+                    padding: 10px 20px;
+                    background: $white;
+                    border-radius: 5px;
+                    width: 100%;
+                    display: none;
+                    @include breakpoint(xl) {
+                        display: none;
+                        width: auto;
+                        min-width: 200px;
+                        position: absolute;
+                        z-index: 99;
+                        left: 0;
+                        top: 100%;
+                        opacity: 0;
+                        visibility: visible;
+                    }
+                    &.menu-open {
+                        display: block;
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                    li {
+                        margin: 5px 0;
+                        a {
+                            color: $gray;
+                            padding: 0;
+                            text-transform: none;
+                            letter-spacing: normal;
+                            display: inline-block;
+                            &:hover {
+                                color: $accent;
+                            }
+                        }
+                    }
+                }
+                
+                .submenu-opener {
+                    line-height: 0;
+                    margin-left: auto;
+                    @include breakpointMax(xl) {
+                        transform: rotate(-90deg);
+                        text-align: center;
+                        line-height: 40px;
+                        width: 40px;
+                        height: 40px;
+                        font-size: 24px;
+                        transition: all 0.35s ease;
+                    }
+                    &.open {
+                        transform: rotate(0);
+                    }
+                }
+                &:hover {
+                    .sub-menu {
+                        // opacity: 1;
+                        // visibility: visible;
+                    }
+                } 
+
+            }
+        }
+
+        a {
+            color: $white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 24px;
+            letter-spacing: 2.1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid transparent;
+            display: inline-block;
+            @include transition;
+            @include breakpointMax(xl) {
+                padding: 15px 0;
+                border: none;
+            }
+                       
+            &:hover, &.active {
+                border-bottom-color: $accent;
+                color: $accent;
+            }
+        }
+    }
+   
+    &--dark {
+        background-color: $dark;
+        color: $white;
+        .header-nav {
+            background-color: $dark;            
+        }
+        
+    }
+    
+    &--light {
+        background-color: $white;
+        color: $primary-dark;
+        .header-nav {
+            background-color: $white;
+            a {
+                color: $dark;
+            }  
+             ul > li .sub-menu {
+                background: $dark;
+                li a {
+                    color: $white;
+                }
+             }        
+        }
+    }
+}

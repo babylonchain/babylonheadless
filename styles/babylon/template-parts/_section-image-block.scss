@@ -1,0 +1,7 @@
+.image-block {
+  & .wp-block-image {
+    & figcaption {
+      line-height: 1.5;
+    }
+  }
+}

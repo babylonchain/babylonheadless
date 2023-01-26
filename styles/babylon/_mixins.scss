@@ -1,0 +1,326 @@
+/// Adds a browser prefix to the property
+/// @param {*} $property Property
+/// @param {*} $value Value
+@mixin css3-prefix($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -khtml-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  -o-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+/// Border Radius
+/// @param {Size} $radius [5px] - Radius
+/// @require {mixin} css3-prefix
+@mixin border-radius($radius: 4px) {
+  @include css3-prefix("border-radius", $radius);
+}
+//transitions
+@mixin transition($type: all, $transition: 0.2s, $effect: ease-in-out) {
+  @include css3-prefix("transition", $type $transition $effect);
+}
+/// Box Shadow
+/// @param {Size} $x [2px] - X
+/// @param {Size} $y [2px] - Y
+/// @param {Size} $blur [5px] - Blur
+/// @param {Color} $color [rgba(0,0,0,.4)] - Color
+/// @param {Boolean} $inset - Inset
+@mixin box-shadow(
+  $top: 2px,
+  $left: 2px,
+  $blur: 5px,
+  $color: rgba(0, 0, 0, 0.4),
+  $inset: ""
+) {
+  @if ($inset != "") {
+    @include css3-prefix("box-shadow", $inset $top $left $blur $color);
+  } @else {
+    @include css3-prefix("box-shadow", $top $left $blur $color);
+  }
+}
+@mixin text-shadow($top, $left, $blur, $color, $inset: "") {
+  -webkit-text-shadow: $top $left $blur $color #{$inset};
+  -moz-text-shadow: $top $left $blur $color #{$inset};
+  text-shadow: $top $left $blur $color #{$inset};
+}
+@mixin backface-visibility($hidden) {
+  -webkit-backface-visibility: $hidden;
+  -moz-backface-visibility: $hidden;
+  -ms-backface-visibility: $hidden;
+  -o-backface-visibility: $hidden;
+  backface-visibility: $hidden;
+}
+@mixin border-right-radius($radius) {
+  -webkit-border-top-right-radius: $radius;
+  -webkit-border-bottom-right-radius: $radius;
+  -moz-border-radius-topright: $radius;
+  -moz-border-radius-bottomright: $radius;
+  border-top-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+  -webkit-border-top-left-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+  -moz-border-radius-topleft: 0;
+  -moz-border-radius-bottomleft: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+@mixin border-left-radius($radius) {
+  -webkit-border-top-right-radius: 0;
+  -webkit-border-bottom-right-radius: 0;
+  -moz-border-radius-topright: 0;
+  -moz-border-radius-bottomright: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  -webkit-border-top-left-radius: $radius;
+  -webkit-border-bottom-left-radius: $radius;
+  -moz-border-radius-topleft: $radius;
+  -moz-border-radius-bottomleft: $radius;
+  border-top-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin transition-timing($ease) {
+  @include css3-prefix("transition-timing-function", $ease);
+}
+@mixin rotate($degree) {
+  @include css3-prefix("transform", rotate($degree));
+}
+@mixin transition_delay($start, $end) {
+  @include css3-prefix("transition-delay", $start, $end);
+}
+@mixin transition_duration($start, $end) {
+  @include css3-prefix(" transition-duration", $start, $end);
+}
+@mixin transition_property($value) {
+  transition-property: $value, transform;
+  -webkit-transition-property: $value, -webkit-transform;
+  -moz-transition-property: $value, -moz-transform;
+  -ms-transition-property: $value, -ms-transform;
+  -o-transition-property: $value, -o-transform;
+}
+@mixin transition_hover($property: all, $time: 0.3s, $function: linear) {
+  -webkit-transition: $property $time $function;
+  -moz-transition: $property $time $function;
+  -ms-transition: $property $time $function;
+  -o-transition: $property $time $function;
+  transition: $property $time $function;
+}
+/// Responsive
+@mixin breakpoint($point) {
+  @if $point==xxxl {
+    @media (min-width: 1920px) {
+      @content;
+    }
+  } @else if $point==xxl {
+    @media (min-width: 1640px) {
+      @content;
+    }
+  } @else if $point==xl {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $point==lg {
+    @media (min-width: 992px) {
+      @content;
+    }
+  } @else if $point==md {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if $point==sm {
+    @media (min-width: 576px) {
+      @content;
+    }
+  } @else if $point==xs {
+    @media (min-width: 0px) {
+      @content;
+    }
+  }
+}
+@mixin breakpointMax($point) {
+  @if $point==xxl {
+    @media (max-width: 1640px) {
+      @content;
+    }
+  }
+  @if $point==xl {
+    @media (max-width: 1199px) {
+      @content;
+    }
+  } @else if $point==lg {
+    @media (max-width: 991px) {
+      @content;
+    }
+  } @else if $point==md {
+    @media (max-width: 767px) {
+      @content;
+    }
+  } @else if $point==sm {
+    @media (max-width: 575px) {
+      @content;
+    }
+  } @else if $point==xs {
+    @media (max-width: 480px) {
+      @content;
+    }
+  }
+}
+@mixin border($side, $width, $style, $color) {
+  @if $side==all {
+    border: $width $style $color;
+  } @else {
+    border-#{$side}: $width $style $color;
+  }
+}
+// ----
+// rem mixins
+// ----
+$rem-base: 16px !default;
+// list-separator polyfill by Hugo Giraudel (https://sass-compatibility.github.io/#list_separator_function)
+@function rem-separator($list) {
+  @if function-exists("list-separator") ==true {
+    @return list-separator($list);
+  }
+  $test-list: ();
+  @each $item in $list {
+    $test-list: append($test-list, $item, space);
+  }
+  @return if($test-list==$list, space, comma);
+}
+@mixin rem-base($zoom: 100%) {
+  font-size: $zoom / 16px * $rem-base;
+}
+@function rem-convert($to, $values...) {
+  $result: ();
+  $separator: rem-separator($values);
+  @each $value in $values {
+    @if type-of($value) == "number" and unit($value) == "rem" and $to== "px" {
+      $result: append($result, $value / 1rem * $rem-base, $separator);
+    } @else if
+      type-of($value) ==
+      "number" and
+      unit($value) ==
+      "px" and
+      $to==
+      "rem"
+    {
+      $result: append($result, $value / ($rem-base / 1rem), $separator);
+    } @else if type-of($value) == "list" {
+      $result: append($result, rem-convert($to, $value...), $separator);
+    } @else {
+      $result: append($result, $value, $separator);
+    }
+  }
+  @return if(length($result) ==1, nth($result, 1), $result);
+}
+@function rem($values...) {
+  @return rem-convert(rem, $values...);
+}
+@mixin rem($properties, $values...) {
+  @if type-of($properties) == "map" {
+    @each $property in map-keys($properties) {
+      @include rem($property, map-get($properties, $property));
+    }
+  } @else {
+    @each $property in $properties {
+      #{$property}: rem-convert(rem, $values...);
+    }
+  }
+}
+// $base-font-size: 100% !default;
+// //$base-line-height is 24px while $base-font-size is 16px
+// $base-line-height: 150%;
+// It strips the unit of measure and returns it
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+@function convert-to-rem($value, $base-value: $rem-base) {
+  $value: strip-unit($value) / strip-unit($base-value) * 1rem;
+  @if ($value==0rem) {
+    $value: 0;
+  } // Turn 0em into 0
+  @return $value;
+}
+@function rem-calc($values, $base-value: $rem-base) {
+  $max: length($values);
+  @if $max==1 {
+    @return convert-to-rem(nth($values, 1), $base-value);
+  }
+  $remValues: ();
+  @for $i from 1 through $max {
+    $remValues: append(
+      $remValues,
+      convert-to-rem(nth($values, $i), $base-value)
+    );
+  }
+  @return $remValues;
+}
+@mixin x_center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+}
+@mixin y_center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+}
+@mixin vertical_center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+}
+@mixin xy_center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+}
+// -----------------------------
+// calc
+// -----------------------------
+@mixin calc($property, $expression) {
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: calc(#{$expression});
+}
+
+// -----------------------------
+// Placeholder
+// -----------------------------
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    opacity: 1;
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &.placeholder {
+    @content;
+  }
+}
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}

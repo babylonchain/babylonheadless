@@ -1,0 +1,125 @@
+.footer {
+    &-top {
+        padding: 25px 0;
+    }
+    &-middle {
+        padding: 23px 0;
+        .footer-logo {
+            @include breakpointMax(lg) {
+                margin-bottom: 20px;
+            }
+        }
+        &-nav {
+            & > ul > li {
+                list-style: none;
+                position: relative;
+                color:var(--bs-link-color);
+                a {
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 33px;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    text-decoration: none;
+
+                }
+                &:not(:first-child) {
+                    @include breakpoint(lg) {
+                        margin-left: 15px;
+                    }
+                    @include breakpoint(xl) {
+                        margin-left: 20px;
+                    }
+                }
+                @include breakpointMax(lg) {
+                    width: 100%;
+                    text-align: center;
+                }
+                .submenu-opener  {
+                    line-height: 0;
+                    transform: rotate(0);
+                    transition: all 0.35s ease;
+                    &.open {
+                        transform: rotate(-180deg);
+                    }
+                }
+                &.has-chiildren {
+                    justify-content: center;
+                }
+                .sub-menu {
+                    margin: 0;
+                    padding: 10px 20px;
+                    background: $primary-dark;
+                    border-radius: 5px;
+                    width: 100%;
+                    display: none;
+                    @include breakpoint(xl) {
+                        display: none;
+                        width: auto;
+                        min-width: 200px;
+                        position: absolute;
+                        z-index: 99;
+                        left: 0;
+                        bottom: 100%;
+                        opacity: 0;
+                        visibility: visible;
+                    }
+                    &.menu-open {
+                        display: block;
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                    li {
+                        margin: 5px 0;
+                        list-style: none;
+                        a {
+                            color: $white;
+                            padding: 0;
+                            text-transform: none;
+                            letter-spacing: normal;
+                            display: inline-block;
+                            &:hover {
+                                color: $accent;
+                            }
+                        }
+                    }
+                }
+                                
+            }
+        }
+    }
+    &-bottom {
+        padding: 24px 0 42px;
+        * {            
+            font-size: 12px;
+            line-height: 36px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: $gray;
+        }
+        a {
+            text-decoration: none;
+        }
+        .copyright {
+            @include breakpoint(md) {
+                margin-right: 20px;
+            }
+        }
+        &-nav {
+            a {
+                &:not(:first-child) {
+                    margin-left: 15px;
+                    @include breakpoint(xl) {
+                        margin-left: 20px;
+                    }
+                }
+                
+            }
+        }
+        .site-by {
+            span {
+                font-weight: 600;
+            }
+        }
+    }
+}

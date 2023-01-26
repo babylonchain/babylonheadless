@@ -1,0 +1,89 @@
+.section-hchi {
+    &.has-background {
+        background-color: $dark;
+    }
+    &.has-gradient {
+        position: relative;
+        background-color: $dark;
+        overflow: hidden;
+        &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(59.37deg, #431075 -73.36%, #421788 -34.34%, #4126B1 56.1%, #412DC2 103.99%),$dark;
+        clip-path: polygon(0 40%, 100% 28%, 100% 100%, 0% 100%);
+        background-blend-mode: overlay;
+        z-index: 1;
+            @include breakpoint(md) {
+                clip-path: polygon(100% 10%, 30% 100%, 100% 100%);
+            }
+        }
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+    }
+    h2 {
+        // @include breakpoint(lg) {
+        //     font-size: 48px;
+        //     line-height: 56px;
+        // }
+    }
+    .desc {
+        margin-top: 35px;
+    }
+    figure {
+        line-height: 0;
+        margin: 0;
+        svg {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .content {
+        margin-top: 35px;
+        max-width: 483px;
+        @include breakpoint(md) {
+            margin-top: 0px;
+            margin-left: auto;
+        }
+        .btn-wrapper {
+            margin-top: 60px;
+        }
+        .lists {
+            list-style: none;
+            padding: 0;
+            margin-top: 47px;
+            &__item {
+                margin-top: 19px;
+                .list-icon {
+                    margin-right: 21px;
+                    width: 32px;
+                }
+                span {
+                    width: calc(100% - 32px - 21px);
+                }
+            }
+        }
+    }
+    .order-md-first {
+        .content {
+            @include breakpoint(md) {
+                // margin-right: 96px;
+                margin-left: 0;
+            }
+        }
+    }
+    .order-md-last {
+        figure {
+            
+            @include breakpoint(md) {
+                // margin-right: 96px;
+                margin-left:auto;
+            }
+        }
+    }
+}

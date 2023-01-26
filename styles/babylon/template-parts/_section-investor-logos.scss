@@ -1,0 +1,20 @@
+.section-logos {
+  .logo-lists {
+    margin-left: -30px;
+    margin-top: -32px;
+    @include breakpoint(xl) {
+      margin-left: -129px;
+    }
+    &__item {
+      margin-top: 32px;
+      margin-left: 30px;
+      @include breakpoint(xl) {
+        margin-left: 129px;
+      }
+      img {
+        max-height: 130px;
+        height: 60px;
+      }
+    }
+  }
+}
