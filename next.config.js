@@ -7,7 +7,7 @@ const nextConfig = {
       defaultLocale: 'en-US',
     },
     images: {
-      domains: ['babylon.draftserver.com', 'babyloncha1stg.wpengine.com']
+      domains: ['babylon.draftserver.com', 'babyloncha1stg.wpengine.com', 'babylonchain.wpengine.com']
     }
   }
   
