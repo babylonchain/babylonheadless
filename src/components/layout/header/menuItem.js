@@ -53,7 +53,7 @@ const MenuItem = (item) => {
     >
       <Link href={item.item.node.uri}>
         {childItems.length ? <a
-          target={item.item?.node?.target ? item.item?.node?.target : '' }
+          target={item.item?.node?.target ? item.item?.node?.target : '_self' }
           onClick={(e) => {
             e.preventDefault();
           }}
@@ -66,7 +66,7 @@ const MenuItem = (item) => {
         >
           {item.item.node.label}
         </a> : <a
-        target={item.item?.node?.target ? item.item?.node?.target : '' }
+        target={item.item?.node?.target ? item.item?.node?.target : '_self' }
           className={
             item.item.node.uri.replace(/\/+$/, "") === currentUrl
               ? "active"
