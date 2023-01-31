@@ -96,7 +96,7 @@ const MenuItem = (item) => {
               <li key={item.node.id}>
                 <Link href={item.node.uri}>
                   <a
-                  target={item?.node?.target ? item?.node?.target : '' }
+                  target={item?.node?.target ? item?.node?.target : '_self' }
                     className={
                       item.node.uri.replace(/\/+$/, "") === currentUrl
                         ? "active"
