@@ -1,0 +1,14 @@
+User-Agent: *
+Allow: /wp-content/uploads/
+Disallow: /wp-admin/
+Disallow: /readme.html
+Disallow: /refer/
+ 
+Sitemap: https://hsktlkv6ge3y6d5awv02y5ryl.js.wpenginepowered.com/sitemap.xml
+Sitemap: https://hsktlkv6ge3y6d5awv02y5ryl.js.wpenginepowered.com/sitemap/category_sitemap1.xml
+Sitemap: https://hsktlkv6ge3y6d5awv02y5ryl.js.wpenginepowered.com/sitemap/user_sitemap1.xml
+Sitemap: https://hsktlkv6ge3y6d5awv02y5ryl.js.wpenginepowered.com/sitemap/post_sitemap1.xml
+Sitemap: https://hsktlkv6ge3y6d5awv02y5ryl.js.wpenginepowered.com/sitemap/page_sitemap1.xml
+Sitemap: https://hsktlkv6ge3y6d5awv02y5ryl.js.wpenginepowered.com/sitemap/career-position_sitemap1.xml
+Sitemap: https://hsktlkv6ge3y6d5awv02y5ryl.js.wpenginepowered.com/sitemap/all-news_sitemap1.xml
+Sitemap: https://hsktlkv6ge3y6d5awv02y5ryl.js.wpenginepowered.com/sitemap/podcasts_sitemap1.xml
