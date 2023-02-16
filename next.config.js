@@ -2,6 +2,7 @@
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
+    productionBrowserSourceMaps: true,
     i18n: {
       locales: ['en-US'],
       defaultLocale: 'en-US',

@@ -16,8 +16,6 @@ export default function BannerBlock(attributes) {
   const bannerButton = attributesData.data.babylon_home_banner_button;
   const bannerButtonSecondary = attributesData.data.babylon_home_banner_button_secondary;
 
-  console.log('btn sec', bannerButtonSecondary);
-
   function getClassName(align) {
     if (align === "center" || align === "right") {
       return `text-${align}`;
