@@ -14,10 +14,9 @@ export default function BannerBlock(attributes) {
   const bannerTitle = attributesData.data.babylon_home_banner_title;
   const bannerText = attributesData.data.babylon_home_banner_text;
   const bannerButton = attributesData.data.babylon_home_banner_button;
+  const bannerButtonSecondary = attributesData.data.babylon_home_banner_button_secondary;
 
-  // const style = {
-  //   background: `url(${bannerImg.url}) right 24px center no-repeat, linear-gradient(180deg, #0038D2 0%, #002BA0 100%)`,
-  // };
+  console.log('btn sec', bannerButtonSecondary);
 
   function getClassName(align) {
     if (align === "center" || align === "right") {
@@ -71,6 +70,7 @@ export default function BannerBlock(attributes) {
         >
           {bannerTitle ? <h1>{bannerTitle}</h1> : ""}
           {bannerText ? <p className="h3">{bannerText}</p> : ""}
+          <div className="btn-wrapper">
           {videoUrl ? (
             <Fancybox
               options={{
@@ -78,16 +78,14 @@ export default function BannerBlock(attributes) {
               }}
             >
               {bannerButton ? (
-                <div className="btn-wrapper">
                   <Link href={bannerButton.url}>
                     <a
                       data-fancybox="video-gallery"
-                      className="btn btn-light btn-lg"
+                      className={`btn btn-light ${ bannerButtonSecondary ? 'd-block d-sm-inline-block': '' }`}
                     >
                       {bannerButton.title}
                     </a>
                   </Link>
-                </div>
               ) : (
                 ""
               )}
@@ -95,18 +93,20 @@ export default function BannerBlock(attributes) {
           ) : (
             <>
               {hash ? (
-                <div className="btn-wrapper">
-                    <span onClick={handleBtn} className="btn btn-light btn-lg">{bannerButton.title}</span>
-                </div>
+                    <span onClick={handleBtn} className={`btn btn-light ${ bannerButtonSecondary ? 'd-block d-sm-inline-block': '' }`}>{bannerButton.title}</span>
               ) : (
-                <div className="btn-wrapper">
+                
                   <Link href={bannerButton.url}>
-                    <a className="btn btn-light btn-lg">{bannerButton.title}</a>
-                  </Link>
-                </div>
+                    <a className={`btn btn-light ${ bannerButtonSecondary ? 'd-block d-sm-inline-block': '' }`}>{bannerButton.title}</a>
+                  </Link>                  
               )}
             </>
           )}
+          { bannerButtonSecondary ?         
+          <Link href={bannerButtonSecondary.url}>          
+            <a className="btn btn-primary d-block d-sm-inline-block mt-3 mt-sm-0 ms-sm-3" target={bannerButtonSecondary.target ? bannerButtonSecondary.target : '_self'}>{bannerButtonSecondary.title}</a>
+          </Link> : ''}  
+          </div>
         </div>
       </Container>
     </section>
