@@ -5,10 +5,11 @@ import { ImFacebook2 } from "react-icons/im";
 
 import Link from "next/link";
 const SharePage = ({data}) => {
-    const origin =
-        typeof window !== 'undefined' && window.location.origin
-            ? window.location.origin
-            : '';
+    // const origin =
+    //     typeof window !== 'undefined' && window.location.origin
+    //         ? window.location.origin
+    //         : '';
+    const origin = process.env.NEXT_PUBLIC_NEXTJS_SITE_URL ? process.env.NEXT_PUBLIC_NEXTJS_SITE_URL : '';
 
     // console.warn(origin);
     return (
