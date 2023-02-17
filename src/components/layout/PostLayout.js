@@ -29,6 +29,20 @@ const PostLayout = ({ data, detailsPage, children }) => {
             dangerouslySetInnerHTML={{ __html: sanitize(seo.schemaDetails) }}
           />
         ) : null}
+        {/* Global site tag (gtag.js) - Google Analytics */}
+        <script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-PGGX9RT4P0"></script>
+        <script
+          id='google-analytics'
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+          __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-PGGX9RT4P0');
+          `,
+          }}
+        />
       </Head>
       <Header
         headerType={headerType}
