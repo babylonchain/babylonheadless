@@ -35,9 +35,9 @@ const Seo = ({ seo, uri }) => {
     <NextSeo
       title={title}
       description={opengraphDescription || metaDesc}
-      canonical={opengraphUrl}
-      noindex={metaRobotsNoindex}
-      nofollow={metaRobotsNofollow}
+      canonical={opengraphUrl}      
+      noindex={metaRobotsNoindex == 'index' ? false : true }
+      nofollow={metaRobotsNofollow == 'follow' ? false : true}
       openGraph={{
         type: "website",
         locale: "en_US",
