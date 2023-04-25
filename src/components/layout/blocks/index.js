@@ -13,6 +13,7 @@ import VideoPopUpBannerBlock from "./VideoPopUpBannerBlock";
 import InvestorLogoCarouselBlock from "./InvestorLogoCarouselBlock";
 import MeetTheTeamBlock from "./MeetTheTeamBlock";
 import BlogListingBlock from "./BlogListingBlock";
+import BlogPostListingBlock from "./BlogPostListingBlock";
 import ImageBlock from "./ImageBlock";
 import CareerListingBlock from "./CareerListingBlock";
 import CustomListBlock from "./CustomListBlock";
@@ -43,7 +44,20 @@ const Blocks = ({ block, categories, newsCategories, podcastsCategories }) => {
       return <InvestorLogoCarouselBlock attributes={attributesJSON} />;
 
     case "AcfBabylonBlogListingBlock":
+
+    const attributesData = JSON.parse(attributesJSON);
+    const postType = attributesData?.data?.choose_post_type;
+
       return (
+        
+        (postType && postType==="posts") ? 
+        <BlogPostListingBlock
+          attributes={attributesJSON}
+          categories={categories}
+          newsCategories={newsCategories}
+          podcastsCategories={podcastsCategories}
+        />
+        :
         <BlogListingBlock
           attributes={attributesJSON}
           categories={categories}
