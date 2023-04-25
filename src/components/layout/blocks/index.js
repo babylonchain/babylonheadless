@@ -14,6 +14,7 @@ import InvestorLogoCarouselBlock from "./InvestorLogoCarouselBlock";
 import MeetTheTeamBlock from "./MeetTheTeamBlock";
 import BlogListingBlock from "./BlogListingBlock";
 import BlogPostListingBlock from "./BlogPostListingBlock";
+import SuggestedArticlesBlock from "./SuggestedArticlesBlock";
 import ImageBlock from "./ImageBlock";
 import CareerListingBlock from "./CareerListingBlock";
 import CustomListBlock from "./CustomListBlock";
@@ -65,6 +66,13 @@ const Blocks = ({ block, categories, newsCategories, podcastsCategories }) => {
           podcastsCategories={podcastsCategories}
         />
       );
+
+    case "AcfBabylonSuggestedArticlesBlock":
+        return (
+          <SuggestedArticlesBlock
+            attributes={attributesJSON}
+          />
+    );
 
     case "AcfBabylonCareerPositionListingBlock":
       return <CareerListingBlock attributes={attributesJSON} />;
