@@ -36,7 +36,10 @@ export default function BlogPostListingBlock({
   
   const [ pageInfo, setPageInfo ] = useState( {
     "hasNext": false,
-    "endCursor": ""
+    "endCursor": "",
+    "offsetPagination": {
+      "total": 0
+    }
   });
 
   const [category, setCategory] = useState(categories);
@@ -80,7 +83,6 @@ export default function BlogPostListingBlock({
         });
 
   // console.warn('from lazy pageinfor', pageInfo);
-console.log("activeCat",activeCat)
   const { loading, error, data, refetch } = useQuery(getPostList(postType), {
     variables: { first: initPageSize, after: ""  },
     onCompleted: ( data ) =>{
@@ -119,16 +121,6 @@ console.log("activeCat",activeCat)
   if (enable === "0") {
     return null;
   }
-
-  const loadMoreItems = ( endCursor = null ) => {
-    getPostByCat({ variables: {
-      filterCats: activeCat,
-      first: pageSize,
-      after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
-      field: featured === "DESC" ? "META_KEY" : "DATE",
-      pageSearch: pageSearch,
-    } });
-  };
 
   return (
     <section
@@ -193,14 +185,14 @@ console.log("activeCat",activeCat)
               </div>
             ) : (
               <>
-                {lazy?.posts?.pageInfo?.offsetPagination?.total === 0 ? (
+                {pageInfo?.offsetPagination?.total === 0 ? (
                   <EmptyPost errorMsg="Try different category simply clicking the left sidebar filter options." />
                 ) : (
                   ""
                 )}
-                <Posts
+                {pageInfo?.offsetPagination?.total!=0 && <Posts
                   posts={ postsData.length>0 ?  postsData : postsDataDefault ?? []}
-                />
+                />}
 
                 { pageInfo?.hasNextPage ? (
                   <div className="w-full flex justify-center lg:my-10">
