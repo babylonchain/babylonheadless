@@ -3,14 +3,17 @@ import ImageFragment from "../fragments/image";
 export const GET_FEATURED_POST = gql`
   query GET_FEATURED_POST(
     $field: PostObjectsConnectionOrderbyEnum!
-    $pageSize: Int!
-    $pageOffset: Int!
+    $pageSearch: String!
+    $first: Int!
+    $after: String
   ) {
     posts(
       where: {
         orderby: { field: $field, order: DESC, metaKeyField: "is_featured" }
-        offsetPagination: { offset: $pageOffset, size: $pageSize }
+        search: $pageSearch 
       }
+      first: $first
+      after: $after
     ) {
       edges {
         node {
@@ -46,6 +49,8 @@ export const GET_FEATURED_POST = gql`
         offsetPagination {
           total
         }
+        hasNextPage
+        endCursor
       }
     }
   }

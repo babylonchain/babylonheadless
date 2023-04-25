@@ -1,12 +1,12 @@
 import { useQuery, useLazyQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 // import { GET_CATEGORIES } from "../../../queries/categories/get-categories";
 import { GET_POSTS } from "../../../queries/posts/get-posts";
 import { GET_POSTS_BY_CATEGORY } from "../../../queries/posts/get-postsByCat";
 import { GET_FEATURED_POST } from "../../../queries/posts/get-featuredPost";
-import Posts from "../../blogs/posts";
+import Blogs from "../../blogs/posts/indexBlogs";
 import PostCategories from "../../blogs/posts/postCategories";
 import PostSortBy from "../../blogs/posts/postSortBy";
 import EmptyPost from "../../EmptyPost";
@@ -135,58 +135,57 @@ console.log("activeCat",activeCat)
       className={
         `section section-blog-listing ${padding ? padding : ""} ${
           paddingRemover ? paddingRemover.toString().replace(",", " ") : ""
-        }` + getClassName(align)
+        }` + getClassName(align) + ' ' + postType
       }
     >
       <Container>
-        <Row>
-          <Col md={4}>
-            <aside>
-              <input name="blogSearch" type="text" placeholder="Search" 
-              onChange={ e =>
-                {
-                  
-                  
-                getPostByCat({ variables: {
-                  filterCats: activeCat,
-                  first: pageSize,
-                  after: "",
-                  field: featured === "DESC" ? "META_KEY" : "DATE",
-                  pageSearch: e.target.value,
-                } });
+            <aside className="d-flex justify-content-between align-items-center">  
+              <div className="posts-cat d-flex">
+                <PostSortBy
+                  featuredStatus={featured}
+                  pageSearch={pageSearch}
+                  pageSize={pageSize}
+                  setFeatured={setFeatured}
+                  getPostByCat={getPostByCat}
+                  setPostsData={setPostsData}
+                  setActiveCat={setActiveCat}
+                  setPageInfo={setPageInfo}
+                  activeCat={activeCat}  
+                  postType={postType}
+                />
+                <PostCategories
+                  data={category}
+                  pageSize={pageSize}
+                  pageSearch={pageSearch}
+                  getPostByCat={getPostByCat}
+                  setPostsData={setPostsData}
+                  setActiveCat={setActiveCat}
+                  activeCat={activeCat}
+                  setPageInfo={setPageInfo}
+                  featuredStatus={featured}
+                  setFeatured={setFeatured}
+                  postType={postType}
+                />
+              </div>
+              <div className="posts-search">
+                <input name="blogSearch" type="text" placeholder="Search" 
+                  onChange={ e => {                  
+                    getPostByCat({ variables: {
+                      filterCats: activeCat,
+                      first: pageSize,
+                      after: "",
+                      field: featured === "DESC" ? "META_KEY" : "DATE",
+                      pageSearch: e.target.value,
+                    } });
 
-                setPageSearch(e.target.value); 
-                setPostsData([]);
-                
-              }}/>
-              <PostSortBy
-                featuredStatus={featured}
-                pageSearch={pageSearch}
-                pageSize={pageSize}
-                setFeatured={setFeatured}
-                getPostByCat={getPostByCat}
-                setPostsData={setPostsData}
-                setActiveCat={setActiveCat}
-                setPageInfo={setPageInfo}
-                activeCat={activeCat}  
-                postType={postType}
-              />
-              <PostCategories
-                data={category}
-                pageSize={pageSize}
-                pageSearch={pageSearch}
-                getPostByCat={getPostByCat}
-                setPostsData={setPostsData}
-                setActiveCat={setActiveCat}
-                activeCat={activeCat}
-                setPageInfo={setPageInfo}
-                featuredStatus={featured}
-                setFeatured={setFeatured}
-                postType={postType}
-              />
+                    setPageSearch(e.target.value); 
+                    setPostsData([]);
+                    
+                  }}
+                />
+              </div>
             </aside>
-          </Col>
-          <Col md={8}>
+          <div className="blog-listing-wrap">
             { loading || lazyLoading ? (
               <div className="loading-wrapper d-flex justify-content-center h-100 align-items-center">
                 <Loading />
@@ -198,7 +197,7 @@ console.log("activeCat",activeCat)
                 ) : (
                   ""
                 )}
-                <Posts
+                <Blogs
                   posts={ postsData.length>0 ?  postsData : postsDataDefault ?? []}
                 />
 
@@ -238,8 +237,7 @@ console.log("activeCat",activeCat)
                 ) : null }
               </>
             )}
-          </Col>
-        </Row>
+          </div>
       </Container>
     </section>
   );
