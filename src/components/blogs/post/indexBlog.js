@@ -6,6 +6,7 @@ import readingTime from "reading-time";
 import { isEmpty } from "lodash";
 import AOS from "aos";
 import Figure from "react-bootstrap/Figure";
+import { format } from "date-fns";
 
 const Blog = ({ post }) => {
   // console.warn('from post tem', post?.featuredImage?.node )
@@ -37,7 +38,8 @@ const Blog = ({ post }) => {
         <div className="post-content-body">
           <div className="post-content-info d-flex">
             <div className="date">
-              {post?.date}
+              {/* {post?.date} */}
+              {format(new Date(post?.date), "dd MMMM yyyy")}
             </div>
             {stats ? (
               <div className="read-time">
@@ -59,7 +61,7 @@ const Blog = ({ post }) => {
             </a>
           </Link>
           <div
-            dangerouslySetInnerHTML={{ __html: sanitize(post?.excerpt ?? "") }}
+            dangerouslySetInnerHTML={{ __html: sanitize(post?.excerpt ?? "").substring(0, 120) + '...' }}
           />
         </div>
         <div className="post-content-footer">

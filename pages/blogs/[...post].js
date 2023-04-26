@@ -25,16 +25,26 @@ const Post = ({ data }) => {
 
   return (
     <PostLayout data={data}>
-      <section className="section-page-title">
+      <section className="section-page-title post">
         <Container>
-          <div className="page-title">
-            <h2 className="h2">
-              {listingPage ? listingPage.title : ""} Detail
-            </h2>
+          <div className="wrap">
+            <Row>
+              <Col lg={6}>
+                <div className="page-title">                
+                  <h2 className="h2">
+                    {data.pageTitle.pageTitle}
+                  </h2>
+                  <PostMeta data={data?.postMeta} />
+                </div>
+              </Col>
+              <Col lg={6}>
+                <h1>Test</h1>
+              </Col>
+            </Row>
           </div>
         </Container>
       </section>
-      <section className="section-post-header">
+      <section className="section-post-header post">
         <Container>
           <Row>
             <Col xs={2}>
