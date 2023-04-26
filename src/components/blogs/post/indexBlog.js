@@ -19,8 +19,8 @@ const Blog = ({ post }) => {
 
   return (
     <article className="post-item">
-      <div className="post-thumbnail image-border">
-        <figure className="overflow-hidden mb-4">
+      <div className="post-thumbnail">
+        <figure className="overflow-hidden">
           {post?.featuredImage ? (
             <CustomImage item={post?.featuredImage?.node} />
           ) : (
@@ -33,49 +33,51 @@ const Blog = ({ post }) => {
           )}
         </figure>
       </div>
-      <div className="post-content content-border">
-        <Link href={`${post?.uri}`}>
-          <a>
-            <h2
-              className="font-bold mb-3 text-lg hover:text-blue-500"
-              dangerouslySetInnerHTML={{
-                __html: sanitize(post?.title ?? ""),
-              }}
-            />
-          </a>
-        </Link>
-        <div
-          dangerouslySetInnerHTML={{ __html: sanitize(post?.excerpt ?? "") }}
-        />
-        <div className="post-footer d-flex flex-wrap align-items-center">
+      <div className="post-content">
+        <div className="post-content-body">
+          <div className="post-content-info d-flex">
+            <div className="date">
+              {post?.date}
+            </div>
+            {stats ? (
+              <div className="read-time">
+                {stats?.minutes < 1
+                  ? "1 min read"
+                  : stats?.minutes.toFixed(0) + " min read"}
+              </div>
+            ) : (
+              ""
+            )}          
+          </div>
+          <Link href={`${post?.uri}`}>
+            <a>
+              <h2
+                dangerouslySetInnerHTML={{
+                  __html: sanitize(post?.title ?? ""),
+                }}
+              />
+            </a>
+          </Link>
+          <div
+            dangerouslySetInnerHTML={{ __html: sanitize(post?.excerpt ?? "") }}
+          />
+        </div>
+        <div className="post-content-footer">
           {!isEmpty(terms) ? (
             <ul>
               {terms.map((term) => {
                 return (
                   <li key={term.databaseId}>
-                    <button
-                      className="btn btn-outline-secondary btn-sm button-style"
-                      disabled
-                    >
+                    <span>
                       {term.name}
-                    </button>
+                    </span>
                   </li>
                 );
               })}
             </ul>
           ) : (
             ""
-          )}
-
-          {stats ? (
-            <div className="reading-time">
-              {stats?.minutes < 1
-                ? "1 min read"
-                : stats?.minutes.toFixed(0) + " min read"}
-            </div>
-          ) : (
-            ""
-          )}
+          )}          
         </div>
       </div>
     </article>
