@@ -17,6 +17,37 @@
       flex-wrap: wrap;
       margin-bottom: 54px;
 
+      .posts-cat-btn {
+        width: 100%;
+        text-align: left;
+        box-shadow: -2px -2px 40px rgba(94, 94, 118, 0.25);
+        border: 1px solid #ced4da;
+        background-color: $white;
+        color: $gray;
+        padding: 9px 16px;
+        position: relative;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 16px;
+          transform: translateY(-50%);
+          height: 16px;
+          width: 16px;
+          background-image: url('../../../public/arrow-down.png');
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
+
+        &:hover {
+          border: 1px solid $secondary !important;
+          background-color: $white !important;
+          color: $gray !important;
+        }
+      }
+
       .posts-cat {
         font-weight: 500;
 
@@ -49,13 +80,22 @@
         }
 
         input {
-          height: 56px;
-          border-radius: 16px;
+          height: 52px;
+          border-radius: 8px;
           padding: 16px;
+          box-shadow: -2px -2px 40px rgba(94, 94, 118, 0.25);
+
+          @include breakpoint(md) {
+            height: 56px;
+          }
 
           &:focus {
             border-color: $secondary;
-            box-shadow: unset;
+            box-shadow: -2px -2px 40px rgba(94, 94, 118, 0.25);
+          }
+
+          &::placeholder {
+            color: $gray;
           }
         }
       }
@@ -66,6 +106,17 @@
 
       .col-md-6 {
         margin-bottom: 24px;
+      }
+
+      .empty-state {
+        width: 100%;
+        max-width: 750px;
+        box-shadow: -2px -2px 40px rgba(94, 94, 118, 0.25);
+        text-align: center;
+
+        .empty-state__message {
+          margin-top: 0;
+        }
       }
 
       .post-item {
@@ -283,4 +334,35 @@
   font-size: 18px;
   line-height: 31px;
   color: $dark;
+}
+
+// Posts Cat Offcanvas
+.posts-cat-offcanvas {
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+
+  .offcanvas-body {
+    padding: 20px 40px;
+
+    .d-flex {
+      flex-wrap: wrap;
+      gap: 20px;
+
+      + .d-flex {
+        margin-top: 20px;
+      }
+
+      .term-lists__item {
+        width: 100%;
+
+        &.active {
+          span {
+            color: $secondary;
+            border-bottom: 2px solid $secondary;
+            padding-bottom: 8px;
+          }
+        }
+      }
+    }
+  }
 }
