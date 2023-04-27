@@ -31,7 +31,7 @@ console.log("attributesData", attributesData?.data)
   return (
     (articles) ? <section
       className={
-        `section section-blog-listing ${padding ? padding : ""} ${
+        `section section-blog-listing posts ${padding ? padding : ""} ${
           paddingRemover ? paddingRemover.toString().replace(",", " ") : ""
         }` + getClassName(align)
       }
