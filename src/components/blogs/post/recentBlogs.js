@@ -13,6 +13,7 @@ const RecentBlogs = ( {recentBlogs} ) => {
 
             const title = blog?.node?.title;
             const date = blog?.node?.date;
+            
             return(
               <div className="post" key={index}>
                 <div className="post-img">
