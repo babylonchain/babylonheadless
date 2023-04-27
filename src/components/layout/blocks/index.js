@@ -67,12 +67,12 @@ const Blocks = ({ block, categories, newsCategories, podcastsCategories }) => {
         />
       );
 
-    case "AcfBabylonSuggestedArticlesBlock":
-        return (
-          <SuggestedArticlesBlock
-            attributes={attributesJSON}
-          />
-    );
+    // case "AcfBabylonSuggestedArticlesBlock":
+    //     return (
+    //       <SuggestedArticlesBlock
+    //         attributes={attributesJSON}
+    //       />
+    // );
 
     case "AcfBabylonCareerPositionListingBlock":
       return <CareerListingBlock attributes={attributesJSON} />;

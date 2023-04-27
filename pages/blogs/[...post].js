@@ -1,4 +1,5 @@
 import client from "../../src/apollo/client";
+import { useQuery } from "@apollo/client";
 import { isEmpty } from "lodash";
 import { GET_POST_SLUGS } from "../../src/queries/posts/get-posts";
 import {
@@ -16,7 +17,9 @@ import Link from "next/link";
 import PostMeta from "../../src/components/blogs/post/PostMeta";
 import SharePage from "../../src/components/SharePage";
 import Blocks from "../../src/components/layout/blocks/index";
-
+import RecentBlogs from "../../src/components/blogs/post/recentBlogs";
+import SuggestedArticlesBlock from "../../src/components/layout/blocks/SuggestedArticlesBlock";
+import { GET_RECENT_POSTS } from "../../src/queries/posts/get-recentPosts";
 const Post = ({ data }) => {
   const router = useRouter();
   const listingPage = data?.logos?.themeOptions?.themeSettings?.chooseBlogPage;
@@ -24,8 +27,17 @@ const Post = ({ data }) => {
     return <div>Loading...</div>;
   }
   const blocks = data?.homeBlocks?.homeBlocks;
+  const pageId = data?.pageInfo?.pageId;
+  const getRecentPostList = (postType) => {
+    return GET_RECENT_POSTS;
+  };
 
-  // console.log(data);
+  const { loading, error, data: recentData } = useQuery(getRecentPostList("posts"), {
+    variables: { first: 3, notIn: [pageId] },
+  });
+ 
+  const recentBlogs = recentData?.posts?.edges ? recentData?.posts?.edges : null;
+
 
   return (
     <PostLayout data={data} detailsPage={'post'}>
@@ -69,43 +81,28 @@ const Post = ({ data }) => {
                   : null}
               </div>
             </Col>
+            {recentBlogs &&
             <Col lg={4}>
-                <div className="recent-posts">
-                  <span className="h4">Recent posts</span>
-                  <div className="posts-wrap">
-                    <div className="post">
-                      <div className="post-img">
-                        <img src="https://babyloncha1stg.wpengine.com/wp-content/uploads/2022/10/bakground-image@2x.png" alt=""></img>
-                      </div>
-                      <div className="post-desc">
-                        <a className="title" href="#">Checkpointing Consumer Zones to Babylon via IBC</a>
-                        <span class="date">09 November 2022</span>
-                      </div>
-                    </div>
-                    <div className="post">
-                      <div className="post-img">
-                        <img src="https://babyloncha1stg.wpengine.com/wp-content/uploads/2022/10/bakground-image@2x.png" alt=""></img>
-                      </div>
-                      <div className="post-desc">
-                        <a className="title" href="#">Checkpointing Consumer Zones to Babylon via IBC</a>
-                        <span class="date">09 November 2022</span>
-                      </div>
-                    </div>
-                    <div className="post">
-                      <div className="post-img">
-                        <img src="https://babyloncha1stg.wpengine.com/wp-content/uploads/2022/10/bakground-image@2x.png" alt=""></img>
-                      </div>
-                      <div className="post-desc">
-                        <a className="title" href="#">Checkpointing Consumer Zones to Babylon via IBC</a>
-                        <span class="date">09 November 2022</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <RecentBlogs
+                  recentBlogs={ recentBlogs }
+                />
             </Col>
+            }
           </Row>
         </Container>
       </section>
+      { blocks && blocks.map((block, index) => {
+                const blockType = block.__typename;
+                const attributesJSON = block.attributesJSON;
+                return (
+                  blockType==="AcfBabylonSuggestedArticlesBlock"  ? 
+                  <SuggestedArticlesBlock
+                    attributes={attributesJSON} key={index}
+                  />
+                  : null
+                )
+             })
+          }
       {/* <div dangerouslySetInnerHTML={{__html: sanitize( data?.page?.content ?? {} )}}/> */}
     </PostLayout>
   );
@@ -130,6 +127,7 @@ export async function getStaticProps({ params }) {
   const footerBottomMenus = data?.footerBottomMenus?.edges;
   const homeBlocks = data?.page?.blocks;
   const pageTitle = data?.page?.title;
+  const pageId = data?.page?.id;
   const uri = data?.page?.uri;
   const seo = data?.page?.seo;
   const date = data?.page?.date;
@@ -147,8 +145,8 @@ export async function getStaticProps({ params }) {
         logos: {
           themeOptions,
         },
-        pageTitle: {
-          pageTitle,
+        pageInfo: {
+          pageId,
         },
         pageTitle: {
           pageTitle,
