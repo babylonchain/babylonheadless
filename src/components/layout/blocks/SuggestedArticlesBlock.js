@@ -55,8 +55,10 @@ export default function SuggestedArticlesBlock({
                     </div>
                     <div className="post-content">
                       <div className="post-content-body">
-                        <div className="date">
-                          {article.post_date && article.post_date}
+                        <div className="post-content-info d-flex">
+                          <div className="date">
+                            {article.post_date && article.post_date}
+                          </div>
                         </div>
                         {article.post_title && <h2>{article.post_title}</h2>}
                         <div>
