@@ -23,7 +23,7 @@ const Blog = ({ post }) => {
       <div className="post-thumbnail">
         <figure className="overflow-hidden">
           {post?.featuredImage ? (
-            <CustomImage item={post?.featuredImage?.node} />
+            <a href={post?.uri}><CustomImage item={post?.featuredImage?.node} /></a>
           ) : (
             <Figure.Image
               width={160}
@@ -38,7 +38,6 @@ const Blog = ({ post }) => {
         <div className="post-content-body">
           <div className="post-content-info d-flex">
             <div className="date">
-              {/* {post?.date} */}
               {format(new Date(post?.date), "dd MMMM yyyy")}
             </div>
             {stats ? (
