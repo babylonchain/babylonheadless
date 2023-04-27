@@ -77,7 +77,7 @@ export default function BlogPostListingBlock({
     activeCat === null
       ? useLazyQuery(featuredQuery(postType), {
         onCompleted: (data) => {
-          console.log('postsData', data)
+          // console.log('postsData', data)
 
           setPosts(data?.posts ?? []);
         }
@@ -138,48 +138,41 @@ export default function BlogPostListingBlock({
     >
       <Container>
         <aside className="d-flex justify-content-between align-items-center">
-          {/* <OffCanvasExample 
-          name="All Articles" 
-          placement={'bottom'} 
-          content="Test Content" 
-          /> */}
-
-          <Button variant="primary" onClick={handleShow} className="me-2">
-            All articles
+          <Button variant="primary" onClick={handleShow} className="posts-cat-btn d-md-none">
+            Filter
           </Button>
-          <Offcanvas show={show} onHide={handleClose} placement={'bottom'} >
-            <Offcanvas.Header closeButton>
-              <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-            </Offcanvas.Header>
+          <Offcanvas className="posts-cat-offcanvas d-md-none" show={show} onHide={handleClose} placement={'bottom'} >
             <Offcanvas.Body>
-            <PostSortBy
-              featuredStatus={featured}
-              pageSearch={pageSearch}
-              pageSize={pageSize}
-              setFeatured={setFeatured}
-              getPostByCat={getPostByCat}
-              setPostsData={setPostsData}
-              setActiveCat={setActiveCat}
-              setPageInfo={setPageInfo}
-              activeCat={activeCat}
-              postType={postType}
-            />
-            <PostCategories
-              data={category}
-              pageSize={pageSize}
-              pageSearch={pageSearch}
-              getPostByCat={getPostByCat}
-              setPostsData={setPostsData}
-              setActiveCat={setActiveCat}
-              activeCat={activeCat}
-              setPageInfo={setPageInfo}
-              featuredStatus={featured}
-              setFeatured={setFeatured}
-              postType={postType}
-            />
+              <PostSortBy
+                featuredStatus={featured}
+                pageSearch={pageSearch}
+                pageSize={pageSize}
+                setFeatured={setFeatured}
+                getPostByCat={getPostByCat}
+                setPostsData={setPostsData}
+                setActiveCat={setActiveCat}
+                setPageInfo={setPageInfo}
+                activeCat={activeCat}
+                postType={postType}
+                onClick={handleClose}
+              />
+              <PostCategories
+                data={category}
+                pageSize={pageSize}
+                pageSearch={pageSearch}
+                getPostByCat={getPostByCat}
+                setPostsData={setPostsData}
+                setActiveCat={setActiveCat}
+                activeCat={activeCat}
+                setPageInfo={setPageInfo}
+                featuredStatus={featured}
+                setFeatured={setFeatured}
+                postType={postType}
+                onClick={handleClose}
+              />
             </Offcanvas.Body>
           </Offcanvas>
-          <div className="posts-cat d-flex">
+          <div className="posts-cat d-none d-md-flex">
             <PostSortBy
               featuredStatus={featured}
               pageSearch={pageSearch}
@@ -225,7 +218,7 @@ export default function BlogPostListingBlock({
                 setPostsData([]);
 
               }} />
-          </div>          
+          </div>
         </aside>
         <div className="blog-listing-wrap">
           {loading || lazyLoading ? (
@@ -235,7 +228,7 @@ export default function BlogPostListingBlock({
           ) : (
             <>
               {pageInfo?.offsetPagination?.total === 0 ? (
-                <EmptyPost errorMsg="Try different category simply clicking the left sidebar filter options." />
+                <EmptyPost errorMsg="Try different category by simply clicking the filter options." />
               ) : (
                 ""
               )}

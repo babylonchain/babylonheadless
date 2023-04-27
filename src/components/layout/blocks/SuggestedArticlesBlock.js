@@ -2,6 +2,7 @@ import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 import Image from "next/image";
+import { sanitize } from "../../../utils/miscellaneous";
 
 export default function SuggestedArticlesBlock({
   attributes
@@ -27,34 +28,55 @@ export default function SuggestedArticlesBlock({
     return null;
   }
 
-console.log("attributesData", attributesData?.data)
+  console.log()
+
+  console.log("attributesData", attributesData?.data)
   return (
     (articles) ? <section
       className={
-        `section section-blog-listing posts ${padding ? padding : ""} ${
-          paddingRemover ? paddingRemover.toString().replace(",", " ") : ""
+        `section section-blog-listing posts ${padding ? padding : ""} ${paddingRemover ? paddingRemover.toString().replace(",", " ") : ""
         }` + getClassName(align)
       }
     >
       <Container>
-        <Row>
-          { articles.map((article)=>{
-            return <Col  md={4} key={article.ID}>
-              { article.post_title && <h3>{article.post_title}</h3>}
-              { article.post_date && <p>{article.post_date}</p>}
-              { article.post_full && <Image
-                src={article.post_full}
-                alt={article.post_title}
-                width={300}
-                height={200}
-              />}
-              { article.post_excerpt && <p>{article.post_excerpt}</p>}
-            </Col>
-          })}
-        </Row>
+        <div className="blog-listing-wrap">
+          <Row>
+            {articles.map((article) => {
+              return (
+                <Col md={4} key={article.ID}>
+                  <article className="post-item">
+                    <div className="post-thumbnail">
+                      {article.post_full && <Image
+                        src={article.post_full}
+                        alt={article.post_title}
+                        width={300}
+                        height={200}
+                      />}
+                    </div>
+                    <div className="post-content">
+                      <div className="post-content-body">
+                        <div className="post-content-info d-flex">
+                          <div className="date">
+                            {article.post_date && article.post_date}
+                          </div>
+                        </div>
+                        {article.post_title && <h2>{article.post_title}</h2>}
+                        <div>
+                          {article.post_excerpt && <div
+                            dangerouslySetInnerHTML={{ __html: sanitize(article.post_excerpt ?? "").substring(0, 120) + '...' }}
+                          />}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </Col>
+              )
+            })}
+          </Row>
+        </div>
       </Container>
     </section>
-    :
-    <></>
+      :
+      <></>
   );
 }
