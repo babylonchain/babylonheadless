@@ -138,7 +138,6 @@ export default function BlogPostListingBlock({
               onChange={ e =>
                 {
                   
-                  
                 getPostByCat({ variables: {
                   filterCats: activeCat,
                   first: pageSize,
