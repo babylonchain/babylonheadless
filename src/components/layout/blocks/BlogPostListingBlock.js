@@ -12,7 +12,8 @@ import PostSortBy from "../../blogs/posts/postSortBy";
 import EmptyPost from "../../EmptyPost";
 import { useRouter } from "next/router";
 import Loading from "../../Loading";
-import OffCanvasExample from "../../blogs/posts/postCategoriesMobile";
+import Button from 'react-bootstrap/Button';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 export default function BlogPostListingBlock({
   attributes,
@@ -50,6 +51,11 @@ export default function BlogPostListingBlock({
   const [featured, setFeatured] = useState("");
 
   const [pageSearch, setPageSearch] = useState("");
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   /********Queries on change filters******/
   const featuredQuery = (postType) => {
@@ -132,7 +138,47 @@ export default function BlogPostListingBlock({
     >
       <Container>
         <aside className="d-flex justify-content-between align-items-center">
-          <OffCanvasExample name="All Articles" placement={'bottom'} content="Test Content" />
+          {/* <OffCanvasExample 
+          name="All Articles" 
+          placement={'bottom'} 
+          content="Test Content" 
+          /> */}
+
+          <Button variant="primary" onClick={handleShow} className="me-2">
+            All articles
+          </Button>
+          <Offcanvas show={show} onHide={handleClose} placement={'bottom'} >
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+            <PostSortBy
+              featuredStatus={featured}
+              pageSearch={pageSearch}
+              pageSize={pageSize}
+              setFeatured={setFeatured}
+              getPostByCat={getPostByCat}
+              setPostsData={setPostsData}
+              setActiveCat={setActiveCat}
+              setPageInfo={setPageInfo}
+              activeCat={activeCat}
+              postType={postType}
+            />
+            <PostCategories
+              data={category}
+              pageSize={pageSize}
+              pageSearch={pageSearch}
+              getPostByCat={getPostByCat}
+              setPostsData={setPostsData}
+              setActiveCat={setActiveCat}
+              activeCat={activeCat}
+              setPageInfo={setPageInfo}
+              featuredStatus={featured}
+              setFeatured={setFeatured}
+              postType={postType}
+            />
+            </Offcanvas.Body>
+          </Offcanvas>
           <div className="posts-cat d-flex">
             <PostSortBy
               featuredStatus={featured}
