@@ -11,14 +11,13 @@ const PostLayout = ({ data, detailsPage, children }) => {
 
   const careers = data?.careers?.careers;
   const blocks = data?.homeBlocks?.homeBlocks;
-  const headerType =
-    data?.headerLayout?.headerLayout?.headerLayout?.chooseHeaderType;
+  const headerType = data?.headerLayout?.headerLayout?.headerLayout?.chooseHeaderType;
   const categories = data?.categories;
   const seo = data?.seo;
   const uri = data?.pageTitle?.uri;
 
   return (
-    <div className="site-wrapper">
+    <div className={`site-wrapper ${detailsPage === "post" ? "blog-details" : ""}`}>
       <Seo seo={seo} uri={uri} />
       <Head>
         {seo?.schemaDetails ? (
@@ -35,7 +34,7 @@ const PostLayout = ({ data, detailsPage, children }) => {
           id='google-analytics'
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-          __html: `
+            __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
@@ -50,22 +49,27 @@ const PostLayout = ({ data, detailsPage, children }) => {
         headerMenus={data?.menus?.headerMenus}
       ></Header>
       <main
-        className={`${
-          detailsPage === "career" ? "career-details" : "blog-details"
-        }`}
+        className={`${detailsPage === "career" ? "career-details" : "blog-details"
+          }`}
       >
         {children}
 
-        {blocks
-          ? blocks.map((block, index) => (
-              <Blocks
-                block={block}
-                careers={careers}
-                categories={categories}
-                key={index}
-              />
-            ))
-          : null}
+        {
+          (() => {
+            if (detailsPage !== "post") {
+              return (
+                blocks ? blocks.map((block, index) => (
+                  <Blocks
+                    block={block}
+                    careers={careers}
+                    categories={categories}
+                    key={index}
+                  />
+                )) : null
+              )
+            }
+          })()
+        }
 
         {detailsPage === "career" ? <CareerApply data={data} /> : ""}
       </main>
