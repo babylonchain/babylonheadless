@@ -48,7 +48,7 @@ export default function BlogPostListingBlock({
   const [pageSize, setPageSize] = useState(6);
 
   const [activeCat, setActiveCat] = useState(null);
-  const [featured, setFeatured] = useState("");
+  const [featured, setFeatured] = useState("no");
 
   const [pageSearch, setPageSearch] = useState("");
 
@@ -69,29 +69,36 @@ export default function BlogPostListingBlock({
   };
   /********Queries on change filters******/
 
+const [
+  getPostByCat,
+  { loading: lazyLoading, called: lazyCaled, data: lazy, refetch: onRefetch },
+] =  useLazyQuery(postByCatQuery(postType), {
+      onCompleted: (data) => {
+        setPosts(data?.posts ?? []);
+      }
+    });
 
-  const [
-    getPostByCat,
-    { loading: lazyLoading, called: lazyCaled, data: lazy, refetch: onRefetch },
-  ] =
-    activeCat === null
-      ? useLazyQuery(featuredQuery(postType), {
+const [
+  getPostByFeature,
+  { loading: lazyLoadingFeature, called: lazyfeatcall, data: lazyfeature, refetch: onRefetchFeat },
+] =  useLazyQuery(featuredQuery(postType), {
         onCompleted: (data) => {
-          // console.log('postsData', data)
-
-          setPosts(data?.posts ?? []);
-        }
-      })
-      : useLazyQuery(postByCatQuery(postType), {
-        onCompleted: (data) => {
-          console.log('lazy2')
           setPosts(data?.posts ?? []);
         }
       });
 
+const [
+  getPostByAll,
+  { loading: lazyLoadingAll, called: lazyAllcall, data: lazyAll, refetch: onRefetchAll },
+] =  useLazyQuery(getPostList(postType), {
+      onCompleted: (data) => {
+        setPosts(data?.posts ?? []);
+      }
+    });
+
   // console.warn('from lazy pageinfor', pageInfo);
   const { loading, error, data, refetch } = useQuery(getPostList(postType), {
-    variables: { first: initPageSize, after: "" },
+    variables: { first: 6, after: "" },
     onCompleted: (data) => {
       setPostsDefault(data?.posts ?? []);
     }
@@ -104,6 +111,7 @@ export default function BlogPostListingBlock({
 
     const newPosts = postsData.concat(posts?.edges);
     setPostsData(newPosts);
+    
     setPageInfo({ ...posts?.pageInfo });
   };
 
@@ -112,11 +120,13 @@ export default function BlogPostListingBlock({
       return;
     }
 
-    const newPosts = postsDataDefault.concat(posts?.edges);
+    const newPosts = postsDataDefault.concat(posts?.edges); 
+
     setPostsDataDefault(newPosts);
     setPageInfo({ ...posts?.pageInfo });
   };
 
+ 
   function getClassName(align) {
     if (align === "center" || align === "right") {
       return `text-${align}`;
@@ -128,6 +138,7 @@ export default function BlogPostListingBlock({
   if (enable === "0") {
     return null;
   }
+  console.log(pageInfo)
 
   return (
     <section
@@ -149,19 +160,26 @@ export default function BlogPostListingBlock({
                 pageSize={pageSize}
                 setFeatured={setFeatured}
                 getPostByCat={getPostByCat}
+                getPostByFeature={getPostByFeature}
+                getPostByAll={getPostByAll}
                 setPostsData={setPostsData}
+                setPostsDataDefault={setPostsDataDefault}
                 setActiveCat={setActiveCat}
                 setPageInfo={setPageInfo}
                 activeCat={activeCat}
                 postType={postType}
                 onClick={handleClose}
+                refetch={refetch}
               />
               <PostCategories
                 data={category}
                 pageSize={pageSize}
                 pageSearch={pageSearch}
                 getPostByCat={getPostByCat}
+                getPostByFeature={getPostByFeature}
+                getPostByAll={getPostByAll}
                 setPostsData={setPostsData}
+                setPostsDataDefault={setPostsDataDefault}
                 setActiveCat={setActiveCat}
                 activeCat={activeCat}
                 setPageInfo={setPageInfo}
@@ -169,6 +187,7 @@ export default function BlogPostListingBlock({
                 setFeatured={setFeatured}
                 postType={postType}
                 onClick={handleClose}
+                refetch={refetch}
               />
             </Offcanvas.Body>
           </Offcanvas>
@@ -179,41 +198,68 @@ export default function BlogPostListingBlock({
               pageSize={pageSize}
               setFeatured={setFeatured}
               getPostByCat={getPostByCat}
+              getPostByFeature={getPostByFeature}
+              getPostByAll={getPostByAll}
               setPostsData={setPostsData}
+              setPostsDataDefault={setPostsDataDefault}
               setActiveCat={setActiveCat}
               setPageInfo={setPageInfo}
               activeCat={activeCat}
               postType={postType}
+              refetch={refetch}
             />
             <PostCategories
               data={category}
               pageSize={pageSize}
               pageSearch={pageSearch}
               getPostByCat={getPostByCat}
+              getPostByFeature={getPostByFeature}
+              getPostByAll={getPostByAll}
               setPostsData={setPostsData}
+              setPostsDataDefault={setPostsDataDefault}
               setActiveCat={setActiveCat}
               activeCat={activeCat}
               setPageInfo={setPageInfo}
               featuredStatus={featured}
               setFeatured={setFeatured}
               postType={postType}
+              refetch={refetch}
             />
           </div>
           <div className="posts-search">
             <input name="blogSearch" type="text" placeholder="Search"
               onChange={e => {
+                if(activeCat!=null){
+                  getPostByCat({
+                    variables: {
+                      filterCats: activeCat,
+                      first: pageSize,
+                      after: "",
+                      field: featured === "DESC" ? "META_KEY" : "DATE",
+                      pageSearch: e.target.value,
+                    }
+                  });
+                }else if(activeCat!=1 && featured==="DESC"){
 
+                  getPostByFeature({
+                    variables: {
+                      filterCats: activeCat,
+                      first: pageSize,
+                      after: "",
+                      pageSearch: pageSearch,
+                    }
+                  })
 
-                getPostByCat({
-                  variables: {
-                    filterCats: activeCat,
-                    first: pageSize,
+                }else{
+                  getPostByAll({
+                    variables: {
+                    first: 6,
                     after: "",
-                    field: featured === "DESC" ? "META_KEY" : "DATE",
-                    pageSearch: e.target.value,
-                  }
-                });
+                    pageSearch: pageSearch
+                    }
+                  })
 
+                }
                 setPageSearch(e.target.value);
                 setPostsData([]);
 
@@ -221,7 +267,7 @@ export default function BlogPostListingBlock({
           </div>
         </aside>
         <div className="blog-listing-wrap">
-          {loading || lazyLoading ? (
+          {loading || lazyLoading || lazyLoadingFeature || lazyLoadingAll ? (
             <div className="loading-wrapper d-flex justify-content-center h-100 align-items-center">
               <Loading />
             </div>
@@ -245,23 +291,45 @@ export default function BlogPostListingBlock({
                   ) : (
                     <button
                       className="btn btn-secondary"
-                      onClick={() => {
+                      onClick={(e) => {
                         // loadMoreItems( pageInfo?.endCursor ); 
-                        refetch({
-                          filterCats: activeCat,
-                          first: pageSize,
-                          after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
-                          field: featured === "DESC" ? "META_KEY" : "DATE",
-                          pageSearch: pageSearch,
-                        })
-
-                        onRefetch({
-                          filterCats: activeCat,
-                          first: pageSize,
-                          after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
-                          field: featured === "DESC" ? "META_KEY" : "DATE",
-                          pageSearch: pageSearch,
-                        })
+                        if(activeCat!=null && postsData.length > 0){
+                          getPostByCat({
+                            variables: {
+                              filterCats: activeCat,
+                              first: pageSize,
+                              after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
+                              field: featured === "DESC" ? "META_KEY" : "DATE",
+                              pageSearch: pageSearch,
+                            }
+                          });
+                        }else if(activeCat!=1 && featured==="DESC" && postsData.length > 0){
+        
+                          getPostByFeature({
+                            variables: {
+                              filterCats: activeCat,
+                              first: pageSize,
+                              after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
+                              pageSearch: pageSearch,
+                            }
+                          })
+        
+                        }else if ( postsData.length > 0){
+                          getPostByAll({
+                            variables: {
+                            first: 6,
+                            after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
+                            pageSearch: pageSearch
+                            }
+                          })
+        
+                        }else{
+                          refetch({
+                            first: pageSize,
+                            after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
+                            pageSearch: pageSearch,
+                          })
+                        }
                       }
                       }
                     >

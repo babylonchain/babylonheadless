@@ -3,12 +3,14 @@ import { isEmpty } from "lodash";
 const PostCategories = ({
   data,
   getPostByCat,
+  setFeatured,
   setActiveCat,
   activeCat,
   featuredStatus,
   postType,
   pageSearch,
-  pageSize
+  pageSize,
+  setPostsData
 }) => {
   return (
     <div className="d-flex">
@@ -24,6 +26,8 @@ const PostCategories = ({
               <span
                 id={term.databaseId}
                 onClick={() => {
+                  setPostsData([]);
+                  setFeatured("");
                   getPostByCat({
                     variables: {
                       field:
