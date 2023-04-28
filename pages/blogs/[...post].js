@@ -11,6 +11,7 @@ import { GET_POST } from "../../src/queries/posts/get-post";
 import { useRouter } from "next/router";
 import PostLayout from "../../src/components/layout/PostLayout";
 import { Container, Row, Col } from "react-bootstrap";
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import BackArrow from "../../src/components/Icons/backArrow";
 import Link from "next/link";
 
@@ -41,6 +42,14 @@ const Post = ({ data }) => {
 
   return (
     <PostLayout data={data} detailsPage={'post'}>
+      <section className="section-breadcrumb">
+        <Container>
+          <Breadcrumb>
+            <Breadcrumb.Item href={listingPage ? listingPage.uri : ""}>Blogs</Breadcrumb.Item>
+            <Breadcrumb.Item active>{data.pageTitle.pageTitle}</Breadcrumb.Item>
+          </Breadcrumb>
+        </Container>
+      </section>
       <section className="section-page-title post-single">
         <Container>
           <div className="page-title-wrap">
