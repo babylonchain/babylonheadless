@@ -127,7 +127,7 @@ const Post = ({ data }) => {
         return (
           blockType === "AcfBabylonSuggestedArticlesBlock" ?
             <SuggestedArticlesBlock
-              attributes={attributesJSON} key={index}
+              attributes={attributesJSON} key={index} alllink={listingPage.uri}
             />
             : null
         )
