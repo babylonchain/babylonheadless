@@ -10,7 +10,8 @@ const PostCategories = ({
   postType,
   pageSearch,
   pageSize,
-  setPostsData
+  setPostsData,
+  setShow
 }) => {
   return (
     <div className="d-flex">
@@ -47,6 +48,7 @@ const PostCategories = ({
                       ? term.databaseId.toString()
                       : term.databaseId
                   );
+                  setShow(false);
                 }}
               >
                 {term.name}
