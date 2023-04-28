@@ -19,6 +19,11 @@ export const GET_POST = gql`
 	    content
 	    slug
 	    uri
+		featuredImage {
+			node {
+				...ImageFragment
+			}
+		}
 		terms {
 			nodes {
 				name
