@@ -1,5 +1,21 @@
 .suggested-articles {
     .title-wrap {
         margin-bottom: 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        a {
+            display: inline-block;
+            min-width: 190px;
+            padding: 10px 20px;
+            border: 1px solid $gray;
+
+            &:hover {
+                border: 1px solid $gray;
+            }
+        }
     }
 }

@@ -40,6 +40,11 @@ export default function SuggestedArticlesBlock({
         {sectionTitle &&
           <div className="title-wrap">
             <h2 className="mb-0">{sectionTitle}</h2>
+            <Link href="">
+              <a className="btn">
+                View all articles
+              </a>
+            </Link>
           </div>
         }
         <div className="blog-listing-wrap">
