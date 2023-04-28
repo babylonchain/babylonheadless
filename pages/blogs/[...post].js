@@ -35,7 +35,7 @@ const Post = ({ data }) => {
   const { loading, error, data: recentData } = useQuery(getRecentPostList("posts"), {
     variables: { first: 3, notIn: [pageId] },
   });
- 
+
   const recentBlogs = recentData?.posts?.edges ? recentData?.posts?.edges : null;
   const getTerms = data?.terms?.pageTerms;
 
@@ -49,13 +49,13 @@ const Post = ({ data }) => {
                 <div className="page-title">
                   <div className="categories">
                     {
-                      getTerms && getTerms.map((term, index)=>{
-                        return(
+                      getTerms && getTerms.map((term, index) => {
+                        return (
                           <span key={index}>{term?.name}</span>
                         )
                       })
                     }
-                    
+
                   </div>
                   <h1 className="h2 mb-0">
                     {data.pageTitle.pageTitle}
@@ -89,27 +89,27 @@ const Post = ({ data }) => {
               </div>
             </Col>
             {recentBlogs &&
-            <Col lg={4}>
-              <RecentBlogs
-                  recentBlogs={ recentBlogs }
+              <Col lg={4}>
+                <RecentBlogs
+                  recentBlogs={recentBlogs}
                 />
-            </Col>
+              </Col>
             }
           </Row>
         </Container>
       </section>
-      { blocks && blocks.map((block, index) => {
-                const blockType = block.__typename;
-                const attributesJSON = block.attributesJSON;
-                return (
-                  blockType==="AcfBabylonSuggestedArticlesBlock"  ? 
-                  <SuggestedArticlesBlock
-                    attributes={attributesJSON} key={index}
-                  />
-                  : null
-                )
-             })
-          }
+      {blocks && blocks.map((block, index) => {
+        const blockType = block.__typename;
+        const attributesJSON = block.attributesJSON;
+        return (
+          blockType === "AcfBabylonSuggestedArticlesBlock" ?
+            <SuggestedArticlesBlock
+              attributes={attributesJSON} key={index} title={"Suggested blogs"}
+            />
+            : null
+        )
+      })
+      }
       {/* <div dangerouslySetInnerHTML={{__html: sanitize( data?.page?.content ?? {} )}}/> */}
     </PostLayout>
   );
@@ -155,7 +155,7 @@ export async function getStaticProps({ params }) {
         pageInfo: {
           pageId,
         },
-        terms:{
+        terms: {
           pageTerms
         },
         pageTitle: {
