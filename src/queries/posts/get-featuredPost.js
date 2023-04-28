@@ -2,14 +2,20 @@ import { gql } from "@apollo/client";
 import ImageFragment from "../fragments/image";
 export const GET_FEATURED_POST = gql`
   query GET_FEATURED_POST(
-    $field: PostObjectsConnectionOrderbyEnum!
     $pageSearch: String!
     $first: Int!
     $after: String
   ) {
     posts(
       where: {
-        orderby: { field: $field, order: DESC, metaKeyField: "is_featured" }
+        metaQuery: {
+            metaArray: [
+              {
+                key: "is_featured",
+                value: "1"
+              }
+            ]
+        },
         search: $pageSearch 
       }
       first: $first

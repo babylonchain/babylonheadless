@@ -1,10 +1,13 @@
 import { gql } from "@apollo/client";
 import ImageFragment from "../fragments/image";
 export const GET_POSTS = gql`
-  query GET_POSTS($first: Int!, $after: String) {
+  query GET_POSTS($first: Int!, $after: String, $pageSearch: String) {
     posts(
       first: $first
-      after: $after 
+      after: $after
+      where: {
+        search: $pageSearch  
+      }
     ) {
       edges {
         node {

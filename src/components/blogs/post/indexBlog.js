@@ -10,9 +10,9 @@ import { format } from "date-fns";
 
 const Blog = ({ post }) => {
   // console.warn('from post tem', post?.featuredImage?.node )
-  const stats = readingTime(post?.content);
+  const stats = readingTime(post?.content); 
   const terms = post?.terms?.nodes;
-console.log('post', post)
+
   useEffect(() => {
     AOS.init();
     AOS.refresh();
