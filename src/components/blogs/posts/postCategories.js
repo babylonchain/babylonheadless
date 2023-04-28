@@ -38,7 +38,7 @@ const PostCategories = ({
                           : term.databaseId,
                       onlySticky: null,
                       pageSearch: pageSearch,
-                      first: 2,
+                      first: pageSize,
                       after: "",
                     },
                   });
