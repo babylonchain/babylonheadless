@@ -12,7 +12,7 @@ const Blog = ({ post }) => {
   // console.warn('from post tem', post?.featuredImage?.node )
   const stats = readingTime(post?.content);
   const terms = post?.terms?.nodes;
-
+console.log('post', post)
   useEffect(() => {
     AOS.init();
     AOS.refresh();
@@ -23,7 +23,11 @@ const Blog = ({ post }) => {
       <div className="post-thumbnail">
         <figure className="overflow-hidden">
           {post?.featuredImage ? (
-            <a href={post?.uri}><CustomImage item={post?.featuredImage?.node} /></a>
+            <Link href={`${post?.uri}`}>
+              <a>
+              <CustomImage item={post?.featuredImage?.node} />
+              </a>
+              </Link>
           ) : (
             <Figure.Image
               width={160}

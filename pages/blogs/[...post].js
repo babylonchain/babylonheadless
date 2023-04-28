@@ -37,7 +37,7 @@ const Post = ({ data }) => {
   });
  
   const recentBlogs = recentData?.posts?.edges ? recentData?.posts?.edges : null;
-
+  const getTerms = data?.terms?.pageTerms;
 
   return (
     <PostLayout data={data} detailsPage={'post'}>
@@ -48,7 +48,14 @@ const Post = ({ data }) => {
               <Col lg={6}>
                 <div className="page-title">
                   <div className="categories">
-                    <span>Category</span>
+                    {
+                      getTerms && getTerms.map((term, index)=>{
+                        return(
+                          <span key={index}>{term?.name}</span>
+                        )
+                      })
+                    }
+                    
                   </div>
                   <h1 className="h2 mb-0">
                     {data.pageTitle.pageTitle}
@@ -127,13 +134,13 @@ export async function getStaticProps({ params }) {
   const footerBottomMenus = data?.footerBottomMenus?.edges;
   const homeBlocks = data?.page?.blocks;
   const pageTitle = data?.page?.title;
+  const pageTerms = data?.page?.terms?.nodes;
   const pageId = data?.page?.id;
   const uri = data?.page?.uri;
   const seo = data?.page?.seo;
   const date = data?.page?.date;
   const author = data?.page?.author?.node;
   // const author = data?.page?.author?.node;
-
   // console.warn(homeBlocks);
 
   const defaultProps = {
@@ -147,6 +154,9 @@ export async function getStaticProps({ params }) {
         },
         pageInfo: {
           pageId,
+        },
+        terms:{
+          pageTerms
         },
         pageTitle: {
           pageTitle,
