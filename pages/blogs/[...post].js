@@ -21,6 +21,9 @@ import Blocks from "../../src/components/layout/blocks/index";
 import RecentBlogs from "../../src/components/blogs/post/recentBlogs";
 import SuggestedArticlesBlock from "../../src/components/layout/blocks/SuggestedArticlesBlock";
 import { GET_RECENT_POSTS } from "../../src/queries/posts/get-recentPosts";
+import CustomImage from "../../src/components/image";
+import Figure from "react-bootstrap/Figure";
+
 const Post = ({ data }) => {
   const router = useRouter();
   const listingPage = data?.logos?.themeOptions?.themeSettings?.chooseBlogPage;
@@ -39,6 +42,8 @@ const Post = ({ data }) => {
 
   const recentBlogs = recentData?.posts?.edges ? recentData?.posts?.edges : null;
   const getTerms = data?.terms?.pageTerms;
+
+  const fImage = data?.pImage?.pageImage?.node;
 
   return (
     <PostLayout data={data} detailsPage={'post'}>
@@ -74,7 +79,16 @@ const Post = ({ data }) => {
               </Col>
               <Col lg={6}>
                 <div className="featured-image">
-                  <img src="https://babyloncha1stg.wpengine.com/wp-content/uploads/2022/10/bakground-image@2x.png" alt=""></img>
+                {fImage ? (
+                  <CustomImage item={fImage} />
+                ) : (
+                  <Figure.Image
+                    width={160}
+                    height={160}
+                    alt="160x160"
+                    src="data:image/svg+xml,%0A%3Csvg width='160' height='160' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cstyle type='text/css'%3E%23holder_18460ebac82 text %7B fill:%23999;font-weight:normal;font-family:var(--bs-font-sans-serif), monospace;font-size:10pt %7D %3C/style%3E%3C/defs%3E%3Cg id='holder_18460ebac82'%3E%3Crect width='160' height='160' fill='%23373940'%3E%3C/rect%3E%3Cg%3E%3Ctext x='60.8203125' y='94.8'%3E160x160%3C/text%3E%3C/g%3E%3C/g%3E%3C/svg%3E"
+                  />
+                )}
                 </div>
               </Col>
             </Row>
@@ -145,6 +159,7 @@ export async function getStaticProps({ params }) {
   const pageTitle = data?.page?.title;
   const pageTerms = data?.page?.terms?.nodes;
   const pageId = data?.page?.id;
+  const pageImage = data?.page?.featuredImage;
   const uri = data?.page?.uri;
   const seo = data?.page?.seo;
   const date = data?.page?.date;
@@ -166,6 +181,9 @@ export async function getStaticProps({ params }) {
         },
         terms: {
           pageTerms
+        },
+        pImage:{
+          pageImage
         },
         pageTitle: {
           pageTitle,
