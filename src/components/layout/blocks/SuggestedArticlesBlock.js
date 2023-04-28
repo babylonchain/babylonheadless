@@ -6,7 +6,7 @@ import { sanitize } from "../../../utils/miscellaneous";
 import Link from "next/link";
 
 export default function SuggestedArticlesBlock({
-  attributes
+  attributes, alllink
 }) {
   const attributesData = JSON.parse(attributes);
   // console.warn(podcastsCategories);
@@ -40,7 +40,7 @@ export default function SuggestedArticlesBlock({
         {sectionTitle &&
           <div className="title-wrap">
             <h2 className="mb-0">{sectionTitle}</h2>
-            <Link href="">
+            <Link href={alllink}>
               <a className="btn">
                 View all articles
               </a>
