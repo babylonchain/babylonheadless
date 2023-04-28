@@ -13,7 +13,8 @@ const PostSortBy = ({
   setPageInfo,
   setActiveCat,
   activeCat,
-  refetch
+  refetch,
+  setShow
 }) => {
   return (
     <div className="d-flex">
@@ -33,6 +34,7 @@ const PostSortBy = ({
               after: "",
               }
             })
+            setShow(false);
           }}
         >
           All articles
@@ -56,6 +58,7 @@ const PostSortBy = ({
                 pageSearch: pageSearch,
               }
             })
+            setShow(false);
           }}
         >
           Featured

@@ -170,6 +170,7 @@ const [
                 postType={postType}
                 onClick={handleClose}
                 refetch={refetch}
+                setShow={setShow}
               />
               <PostCategories
                 data={category}
@@ -188,6 +189,7 @@ const [
                 postType={postType}
                 onClick={handleClose}
                 refetch={refetch}
+                setShow={setShow}
               />
             </Offcanvas.Body>
           </Offcanvas>
@@ -207,6 +209,7 @@ const [
               activeCat={activeCat}
               postType={postType}
               refetch={refetch}
+              setShow={setShow}
             />
             <PostCategories
               data={category}
@@ -224,6 +227,7 @@ const [
               setFeatured={setFeatured}
               postType={postType}
               refetch={refetch}
+              setShow={setShow}
             />
           </div>
           <div className="posts-search">
