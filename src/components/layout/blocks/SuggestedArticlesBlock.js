@@ -6,7 +6,7 @@ import { sanitize } from "../../../utils/miscellaneous";
 import Link from "next/link";
 
 export default function SuggestedArticlesBlock({
-  attributes, title
+  attributes
 }) {
   const attributesData = JSON.parse(attributes);
   // console.warn(podcastsCategories);
@@ -37,9 +37,11 @@ export default function SuggestedArticlesBlock({
       }
     >
       <Container>
-        <div className="title-wrap">
-          <h2 className="mb-0">{title}</h2>
-        </div>
+        {sectionTitle &&
+          <div className="title-wrap">
+            <h2 className="mb-0">{sectionTitle}</h2>
+          </div>
+        }
         <div className="blog-listing-wrap">
           <Row className="justify-content-center">
             {articles.map((article) => {
