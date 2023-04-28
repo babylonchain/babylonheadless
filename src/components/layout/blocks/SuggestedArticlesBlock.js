@@ -3,6 +3,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Image from "next/image";
 import { sanitize } from "../../../utils/miscellaneous";
+import Link from "next/link";
 
 export default function SuggestedArticlesBlock({
   attributes
@@ -28,9 +29,6 @@ export default function SuggestedArticlesBlock({
     return null;
   }
 
-  console.log()
-
-  console.log("attributesData", attributesData?.data)
   return (
     (articles) ? <section
       className={
@@ -46,12 +44,18 @@ export default function SuggestedArticlesBlock({
                 <Col md={4} key={article.ID}>
                   <article className="post-item">
                     <div className="post-thumbnail">
-                      {article.post_full && <Image
+                      {article.post_full && 
+                       <Link href={"/blogs/"+`${article?.post_slug}`}>
+                        <a>
+                      <Image
                         src={article.post_full}
                         alt={article.post_title}
                         width={300}
                         height={200}
-                      />}
+                      />
+                      </a>
+                      </Link>
+                      }
                     </div>
                     <div className="post-content">
                       <div className="post-content-body">
@@ -60,7 +64,13 @@ export default function SuggestedArticlesBlock({
                             {article.post_date && article.post_date}
                           </div>
                         </div>
-                        {article.post_title && <h2>{article.post_title}</h2>}
+                        {article.post_title && 
+                        <Link href={"/blogs/"+`${article?.post_slug}`}>
+                        <a>
+                          <h2>{article.post_title}</h2>
+                        </a>
+                        </Link>  
+                        }
                         <div>
                           {article.post_excerpt && <div
                             dangerouslySetInnerHTML={{ __html: sanitize(article.post_excerpt ?? "").substring(0, 120) + '...' }}
