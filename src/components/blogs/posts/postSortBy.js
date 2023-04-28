@@ -6,30 +6,33 @@ const PostSortBy = ({
   setPageActive,
   setPageOffset,
   getPostByCat,
+  getPostByFeature,
+  getPostByAll,
   setPostsData,
+  setPostsDataDefault,
   setPageInfo,
   setActiveCat,
   activeCat,
+  refetch
 }) => {
   return (
     <div className="d-flex">
       <div
-        className={`term-lists__item ${featuredStatus === "DESC" ? "" : "active"
+        className={`term-lists__item ( ${featuredStatus === "no" ? "active" : ""
           }`}
       >
         <span
           onClick={() => {
             setPostsData([]);
-            setFeatured("");
-            getPostByCat({
+            setPostsDataDefault([]);
+            setFeatured("no");
+            setActiveCat(null)
+            getPostByAll({
               variables: {
-                filterCats: activeCat,
-                first: pageSize,
-                after: "",
-                field: "DATE",
-                pageSearch: pageSearch,
+              first: 6,
+              after: "",
               }
-            });
+            })
           }}
         >
           All articles
@@ -41,17 +44,18 @@ const PostSortBy = ({
       >
         <span
           onClick={() => {
-            setPostsData((prev) => { return []; });
+            setPostsData([]);
+            setPostsDataDefault([]);
             setFeatured("DESC");
-            getPostByCat({
+            setActiveCat(null)
+            getPostByFeature({
               variables: {
                 filterCats: activeCat,
                 first: pageSize,
                 after: "",
-                field: "META_KEY",
                 pageSearch: pageSearch,
               }
-            });
+            })
           }}
         >
           Featured
