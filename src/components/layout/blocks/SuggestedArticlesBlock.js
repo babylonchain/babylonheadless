@@ -55,7 +55,7 @@ export default function SuggestedArticlesBlock({
                   <article className="post-item">
                     <div className="post-thumbnail">
                       {article.post_full &&
-                        <Link href={"/blogs/" + `${article?.post_slug}`}>
+                        <Link href={`${article?.post_slug}`}>
                           <a>
                             <figure>
                               <Image
@@ -77,7 +77,7 @@ export default function SuggestedArticlesBlock({
                           </div>
                         </div>
                         {article.post_title &&
-                          <Link href={"/blogs/" + `${article?.post_slug}`}>
+                          <Link href={`${article?.post_slug}`}>
                             <a>
                               <h2>{article.post_title}</h2>
                             </a>

@@ -17,7 +17,7 @@ const Blog = ({ post }) => {
     AOS.init();
     AOS.refresh();
   }, []);
-
+// console.log('asdfdf',post)
   return (
     <article className="post-item">
       <div className="post-thumbnail">
