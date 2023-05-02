@@ -11,6 +11,8 @@ export default function Home({ data }) {
   //   console.warn(item.attributes.data);
     
   // })
+
+  console.log('data', data)
  
   return (
     <Layout data={data}></Layout>    
