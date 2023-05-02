@@ -12,8 +12,6 @@ export default function Home({ data }) {
     
   // })
 
-  console.log('data', data)
- 
   return (
     <Layout data={data}></Layout>    
   )
