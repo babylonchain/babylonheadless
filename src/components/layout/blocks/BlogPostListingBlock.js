@@ -69,32 +69,32 @@ export default function BlogPostListingBlock({
   };
   /********Queries on change filters******/
 
-const [
-  getPostByCat,
-  { loading: lazyLoading, called: lazyCaled, data: lazy, refetch: onRefetch },
-] =  useLazyQuery(postByCatQuery(postType), {
-      onCompleted: (data) => {
-        setPosts(data?.posts ?? []);
-      }
-    });
+  const [
+    getPostByCat,
+    { loading: lazyLoading, called: lazyCaled, data: lazy, refetch: onRefetch },
+  ] = useLazyQuery(postByCatQuery(postType), {
+    onCompleted: (data) => {
+      setPosts(data?.posts ?? []);
+    }
+  });
 
-const [
-  getPostByFeature,
-  { loading: lazyLoadingFeature, called: lazyfeatcall, data: lazyfeature, refetch: onRefetchFeat },
-] =  useLazyQuery(featuredQuery(postType), {
-        onCompleted: (data) => {
-          setPosts(data?.posts ?? []);
-        }
-      });
+  const [
+    getPostByFeature,
+    { loading: lazyLoadingFeature, called: lazyfeatcall, data: lazyfeature, refetch: onRefetchFeat },
+  ] = useLazyQuery(featuredQuery(postType), {
+    onCompleted: (data) => {
+      setPosts(data?.posts ?? []);
+    }
+  });
 
-const [
-  getPostByAll,
-  { loading: lazyLoadingAll, called: lazyAllcall, data: lazyAll, refetch: onRefetchAll },
-] =  useLazyQuery(getPostList(postType), {
-      onCompleted: (data) => {
-        setPosts(data?.posts ?? []);
-      }
-    });
+  const [
+    getPostByAll,
+    { loading: lazyLoadingAll, called: lazyAllcall, data: lazyAll, refetch: onRefetchAll },
+  ] = useLazyQuery(getPostList(postType), {
+    onCompleted: (data) => {
+      setPosts(data?.posts ?? []);
+    }
+  });
 
   // console.warn('from lazy pageinfor', pageInfo);
   const { loading, error, data, refetch } = useQuery(getPostList(postType), {
@@ -111,7 +111,7 @@ const [
 
     const newPosts = postsData.concat(posts?.edges);
     setPostsData(newPosts);
-    
+
     setPageInfo({ ...posts?.pageInfo });
   };
 
@@ -120,13 +120,13 @@ const [
       return;
     }
 
-    const newPosts = postsDataDefault.concat(posts?.edges); 
+    const newPosts = postsDataDefault.concat(posts?.edges);
 
     setPostsDataDefault(newPosts);
     setPageInfo({ ...posts?.pageInfo });
   };
 
- 
+
   function getClassName(align) {
     if (align === "center" || align === "right") {
       return `text-${align}`;
@@ -141,19 +141,94 @@ const [
   console.log(pageInfo)
 
   return (
-    <section
-      className={
-        `section section-blog-listing ${padding ? padding : ""} ${paddingRemover ? paddingRemover.toString().replace(",", " ") : ""
-        }` + getClassName(align) + ' ' + postType
-      }
-    >
-      <Container>
-        <aside className="d-flex justify-content-between align-items-center">
-          <Button variant="primary" onClick={handleShow} className="posts-cat-btn d-md-none">
-            Filter
-          </Button>
-          <Offcanvas className="posts-cat-offcanvas d-md-none" show={show} onHide={handleClose} placement={'bottom'} >
-            <Offcanvas.Body>
+    <>
+      <section className="featured-post">
+        <Container>
+          <h2 className="title featured">Featured</h2>
+          <div className="featured-post-wrap">
+            <Row>
+              <Col lg={6}>
+                <div className="image-wrap">
+                  <img src="https://babyloncha1stg.wpengine.com/wp-content/uploads/2022/10/bakground-image@2x.png" alt=""></img>
+                </div>
+              </Col>
+              <Col lg={6}>
+                <div className="info-wrap">
+                  <div className="info-wrap-top">
+                    <div class="meta-info d-flex">
+                      <div class="date">09 November 2022</div>
+                      <div class="read-time">5 min read</div>
+                    </div>
+                    <h2 className="title">Checkpointing Babylon to BTC</h2>
+                    <div>
+                      <p>In a nutshell, Babylon implements the following mechanisms to checkpoint itself to BTC: Introduction Baby...</p>
+                    </div>
+                  </div>
+                  <div class="categories">
+                    <ul>
+                      <li><span>Featured</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </Container>
+      </section>
+
+      <section
+        className={
+          `section section-blog-listing ${padding ? padding : ""} ${paddingRemover ? paddingRemover.toString().replace(",", " ") : ""
+          }` + getClassName(align) + ' ' + postType
+        }
+      >
+        <Container>
+          <aside className="d-flex justify-content-between align-items-center">
+            <Button variant="primary" onClick={handleShow} className="posts-cat-btn d-md-none">
+              Filter
+            </Button>
+            <Offcanvas className="posts-cat-offcanvas d-md-none" show={show} onHide={handleClose} placement={'bottom'} >
+              <Offcanvas.Body>
+                <PostSortBy
+                  featuredStatus={featured}
+                  pageSearch={pageSearch}
+                  pageSize={pageSize}
+                  setFeatured={setFeatured}
+                  getPostByCat={getPostByCat}
+                  getPostByFeature={getPostByFeature}
+                  getPostByAll={getPostByAll}
+                  setPostsData={setPostsData}
+                  setPostsDataDefault={setPostsDataDefault}
+                  setActiveCat={setActiveCat}
+                  setPageInfo={setPageInfo}
+                  activeCat={activeCat}
+                  postType={postType}
+                  onClick={handleClose}
+                  refetch={refetch}
+                  setShow={setShow}
+                />
+                <PostCategories
+                  data={category}
+                  pageSize={pageSize}
+                  pageSearch={pageSearch}
+                  getPostByCat={getPostByCat}
+                  getPostByFeature={getPostByFeature}
+                  getPostByAll={getPostByAll}
+                  setPostsData={setPostsData}
+                  setPostsDataDefault={setPostsDataDefault}
+                  setActiveCat={setActiveCat}
+                  activeCat={activeCat}
+                  setPageInfo={setPageInfo}
+                  featuredStatus={featured}
+                  setFeatured={setFeatured}
+                  postType={postType}
+                  onClick={handleClose}
+                  refetch={refetch}
+                  setShow={setShow}
+                />
+              </Offcanvas.Body>
+            </Offcanvas>
+            <div className="posts-cat d-none d-md-flex">
               <PostSortBy
                 featuredStatus={featured}
                 pageSearch={pageSearch}
@@ -168,7 +243,6 @@ const [
                 setPageInfo={setPageInfo}
                 activeCat={activeCat}
                 postType={postType}
-                onClick={handleClose}
                 refetch={refetch}
                 setShow={setShow}
               />
@@ -187,165 +261,127 @@ const [
                 featuredStatus={featured}
                 setFeatured={setFeatured}
                 postType={postType}
-                onClick={handleClose}
                 refetch={refetch}
                 setShow={setShow}
               />
-            </Offcanvas.Body>
-          </Offcanvas>
-          <div className="posts-cat d-none d-md-flex">
-            <PostSortBy
-              featuredStatus={featured}
-              pageSearch={pageSearch}
-              pageSize={pageSize}
-              setFeatured={setFeatured}
-              getPostByCat={getPostByCat}
-              getPostByFeature={getPostByFeature}
-              getPostByAll={getPostByAll}
-              setPostsData={setPostsData}
-              setPostsDataDefault={setPostsDataDefault}
-              setActiveCat={setActiveCat}
-              setPageInfo={setPageInfo}
-              activeCat={activeCat}
-              postType={postType}
-              refetch={refetch}
-              setShow={setShow}
-            />
-            <PostCategories
-              data={category}
-              pageSize={pageSize}
-              pageSearch={pageSearch}
-              getPostByCat={getPostByCat}
-              getPostByFeature={getPostByFeature}
-              getPostByAll={getPostByAll}
-              setPostsData={setPostsData}
-              setPostsDataDefault={setPostsDataDefault}
-              setActiveCat={setActiveCat}
-              activeCat={activeCat}
-              setPageInfo={setPageInfo}
-              featuredStatus={featured}
-              setFeatured={setFeatured}
-              postType={postType}
-              refetch={refetch}
-              setShow={setShow}
-            />
-          </div>
-          <div className="posts-search">
-            <input name="blogSearch" type="text" placeholder="Search"
-              onChange={e => {
-                if(activeCat!=null){
-                  getPostByCat({
-                    variables: {
-                      filterCats: activeCat,
-                      first: pageSize,
-                      after: "",
-                      field: featured === "DESC" ? "META_KEY" : "DATE",
-                      pageSearch: e.target.value,
-                    }
-                  });
-                }else if(activeCat!=1 && featured==="DESC"){
-
-                  getPostByFeature({
-                    variables: {
-                      filterCats: activeCat,
-                      first: pageSize,
-                      after: "",
-                      pageSearch: pageSearch,
-                    }
-                  })
-
-                }else{
-                  getPostByAll({
-                    variables: {
-                    first: 6,
-                    after: "",
-                    pageSearch: pageSearch
-                    }
-                  })
-
-                }
-                setPageSearch(e.target.value);
-                setPostsData([]);
-
-              }} />
-          </div>
-        </aside>
-        <div className="blog-listing-wrap">
-          {loading || lazyLoading || lazyLoadingFeature || lazyLoadingAll ? (
-            <div className="loading-wrapper d-flex justify-content-center h-100 align-items-center">
-              <Loading />
             </div>
-          ) : (
-            <>
-              {pageInfo?.offsetPagination?.total === 0 ? (
-                <EmptyPost errorMsg="Try different category by simply clicking the filter options." />
-              ) : (
-                ""
-              )}
-              {pageInfo?.offsetPagination?.total != 0 && <Blogs
-                posts={postsData.length > 0 ? postsData : postsDataDefault ?? []}
-              />}
+            <div className="posts-search">
+              <input name="blogSearch" type="text" placeholder="Search"
+                onChange={e => {
+                  if (activeCat != null) {
+                    getPostByCat({
+                      variables: {
+                        filterCats: activeCat,
+                        first: pageSize,
+                        after: "",
+                        field: featured === "DESC" ? "META_KEY" : "DATE",
+                        pageSearch: e.target.value,
+                      }
+                    });
+                  } else if (activeCat != 1 && featured === "DESC") {
 
-              {pageInfo?.hasNextPage ? (
-                <div className="load-more-wrap w-full flex justify-center lg:my-10">
-                  {loading || lazyLoading ? (
-                    <div className="flex justify-center w-full border border-white px-3 py-2 my-8">
-                      Loading...
-                    </div>
-                  ) : (
-                    <button
-                      className="btn btn-secondary"
-                      onClick={(e) => {
-                        // loadMoreItems( pageInfo?.endCursor ); 
-                        if(activeCat!=null && postsData.length > 0){
-                          getPostByCat({
-                            variables: {
-                              filterCats: activeCat,
+                    getPostByFeature({
+                      variables: {
+                        filterCats: activeCat,
+                        first: pageSize,
+                        after: "",
+                        pageSearch: pageSearch,
+                      }
+                    })
+
+                  } else {
+                    getPostByAll({
+                      variables: {
+                        first: 6,
+                        after: "",
+                        pageSearch: pageSearch
+                      }
+                    })
+
+                  }
+                  setPageSearch(e.target.value);
+                  setPostsData([]);
+
+                }} />
+            </div>
+          </aside>
+          <div className="blog-listing-wrap">
+            {loading || lazyLoading || lazyLoadingFeature || lazyLoadingAll ? (
+              <div className="loading-wrapper d-flex justify-content-center h-100 align-items-center">
+                <Loading />
+              </div>
+            ) : (
+              <>
+                {pageInfo?.offsetPagination?.total === 0 ? (
+                  <EmptyPost errorMsg="Try different category by simply clicking the filter options." />
+                ) : (
+                  ""
+                )}
+                {pageInfo?.offsetPagination?.total != 0 && <Blogs
+                  posts={postsData.length > 0 ? postsData : postsDataDefault ?? []}
+                />}
+
+                {pageInfo?.hasNextPage ? (
+                  <div className="load-more-wrap w-full flex justify-center lg:my-10">
+                    {loading || lazyLoading ? (
+                      <div className="flex justify-center w-full border border-white px-3 py-2 my-8">
+                        Loading...
+                      </div>
+                    ) : (
+                      <button
+                        className="btn btn-secondary"
+                        onClick={(e) => {
+                          // loadMoreItems( pageInfo?.endCursor ); 
+                          if (activeCat != null && postsData.length > 0) {
+                            getPostByCat({
+                              variables: {
+                                filterCats: activeCat,
+                                first: pageSize,
+                                after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
+                                field: featured === "DESC" ? "META_KEY" : "DATE",
+                                pageSearch: pageSearch,
+                              }
+                            });
+                          } else if (activeCat != 1 && featured === "DESC" && postsData.length > 0) {
+
+                            getPostByFeature({
+                              variables: {
+                                filterCats: activeCat,
+                                first: pageSize,
+                                after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
+                                pageSearch: pageSearch,
+                              }
+                            })
+
+                          } else if (postsData.length > 0) {
+                            getPostByAll({
+                              variables: {
+                                first: 6,
+                                after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
+                                pageSearch: pageSearch
+                              }
+                            })
+
+                          } else {
+                            refetch({
                               first: pageSize,
                               after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
-                              field: featured === "DESC" ? "META_KEY" : "DATE",
                               pageSearch: pageSearch,
-                            }
-                          });
-                        }else if(activeCat!=1 && featured==="DESC" && postsData.length > 0){
-        
-                          getPostByFeature({
-                            variables: {
-                              filterCats: activeCat,
-                              first: pageSize,
-                              after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
-                              pageSearch: pageSearch,
-                            }
-                          })
-        
-                        }else if ( postsData.length > 0){
-                          getPostByAll({
-                            variables: {
-                            first: 6,
-                            after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
-                            pageSearch: pageSearch
-                            }
-                          })
-        
-                        }else{
-                          refetch({
-                            first: pageSize,
-                            after: pageInfo?.endCursor ? pageInfo?.endCursor : "",
-                            pageSearch: pageSearch,
-                          })
+                            })
+                          }
                         }
-                      }
-                      }
-                    >
-                      Load more
-                    </button>
-                  )}
-                </div>
-              ) : null}
-            </>
-          )}
-        </div>
-      </Container>
-    </section>
+                        }
+                      >
+                        Load more
+                      </button>
+                    )}
+                  </div>
+                ) : null}
+              </>
+            )}
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }
