@@ -51,20 +51,20 @@ const Blocks = ({ block, categories, newsCategories, podcastsCategories }) => {
 
       return (
         
-        (postType && postType==="posts") ? 
+        // (postType && postType==="posts") ? 
         <BlogPostListingBlock
           attributes={attributesJSON}
           categories={categories}
           newsCategories={newsCategories}
           podcastsCategories={podcastsCategories}
         />
-        :
-        <BlogListingBlock
-          attributes={attributesJSON}
-          categories={categories}
-          newsCategories={newsCategories}
-          podcastsCategories={podcastsCategories}
-        />
+        // :
+        // <BlogListingBlock
+        //   attributes={attributesJSON}
+        //   categories={categories}
+        //   newsCategories={newsCategories}
+        //   podcastsCategories={podcastsCategories}
+        // />
       );
 
     // case "AcfBabylonSuggestedArticlesBlock":

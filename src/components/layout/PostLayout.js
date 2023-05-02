@@ -7,7 +7,7 @@ import { sanitize } from "../../utils/miscellaneous";
 import CareerApply from "./blocks/CareerApply";
 
 const PostLayout = ({ data, detailsPage, children }) => {
-  // console.warn('page', data);
+  console.warn('page', data);
 
   const careers = data?.careers?.careers;
   const blocks = data?.homeBlocks?.homeBlocks;

@@ -6,6 +6,12 @@ import { Container, Row, Col } from "react-bootstrap";
 import { GET_POSTS } from "../../../queries/posts/get-posts";
 import { GET_POSTS_BY_CATEGORY } from "../../../queries/posts/get-postsByCat";
 import { GET_FEATURED_POST } from "../../../queries/posts/get-featuredPost";
+import { GET_NEWS } from "../../../queries/news/get-news";
+import { GET_NEWS_BY_CATEGORY } from "../../../queries/news/get-newsByCat";
+import { GET_FEATURED_NEWS } from "../../../queries/news/get-featuredNews";
+import { GET_PODCASTS } from "../../../queries/podcast/get-podcasts";
+import { GET_PODCAST_BY_CATEGORY } from "../../../queries/podcast/get-podcastByCat";
+import { GET_FEATURED_PODCAST } from "../../../queries/podcast/get-featuredPodcast";
 import Blogs from "../../blogs/posts/indexBlogs";
 import PostCategories from "../../blogs/posts/postCategories";
 import PostSortBy from "../../blogs/posts/postSortBy";
@@ -18,8 +24,11 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 export default function BlogPostListingBlock({
   attributes,
   categories,
+  newsCategories,
+  podcastsCategories,
 }) {
 
+  const router = useRouter();
   const attributesData = JSON.parse(attributes);
 
   const align = attributesData?.align;
@@ -59,13 +68,31 @@ export default function BlogPostListingBlock({
 
   /********Queries on change filters******/
   const featuredQuery = (postType) => {
-    return GET_FEATURED_POST;
+    if (postType === "news") {
+      return GET_FEATURED_NEWS;
+    } else if (postType === "podcasts") {
+      return GET_FEATURED_PODCAST;
+    } else {
+      return GET_FEATURED_POST;
+    }
   };
   const postByCatQuery = (postType) => {
-    return GET_POSTS_BY_CATEGORY;
+    if (postType === "news") {
+      return GET_NEWS_BY_CATEGORY;
+    } else if (postType === "podcasts") {
+      return GET_PODCAST_BY_CATEGORY;
+    } else {
+      return GET_POSTS_BY_CATEGORY;
+    }
   };
   const getPostList = (postType) => {
-    return GET_POSTS;
+    if (postType === "news") {
+      return GET_NEWS;
+    } else if (postType === "podcasts") {
+      return GET_PODCASTS;
+    } else {
+      return GET_POSTS;
+    }
   };
   /********Queries on change filters******/
 
@@ -138,13 +165,26 @@ const [
   if (enable === "0") {
     return null;
   }
-  console.log(pageInfo)
+
+  useEffect(() => {
+    setFeatured("");
+    setActiveCat(null);
+    setPostsData([]);
+    setPostsDataDefault([]);
+    if (postType === "news") {
+      setCategory(newsCategories);
+    } else if (postType === "podcasts") {
+      setCategory(podcastsCategories);
+    } else {
+      setCategory(categories);
+    }
+  }, [router.asPath]);
 
   return (
     <section
       className={
         `section section-blog-listing ${padding ? padding : ""} ${paddingRemover ? paddingRemover.toString().replace(",", " ") : ""
-        }` + getClassName(align) + ' ' + postType
+        }` + getClassName(align) + ' posts'
       }
     >
       <Container>
