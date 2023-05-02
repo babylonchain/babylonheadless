@@ -138,44 +138,9 @@ export default function BlogPostListingBlock({
   if (enable === "0") {
     return null;
   }
-  console.log(pageInfo)
 
   return (
     <>
-      <section className="featured-post">
-        <Container>
-          <h2 className="title featured">Featured</h2>
-          <div className="featured-post-wrap">
-            <Row>
-              <Col lg={6}>
-                <div className="image-wrap">
-                  <img src="https://babyloncha1stg.wpengine.com/wp-content/uploads/2022/10/bakground-image@2x.png" alt=""></img>
-                </div>
-              </Col>
-              <Col lg={6}>
-                <div className="info-wrap">
-                  <div className="info-wrap-top">
-                    <div class="meta-info d-flex">
-                      <div class="date">09 November 2022</div>
-                      <div class="read-time">5 min read</div>
-                    </div>
-                    <h2 className="title">Checkpointing Babylon to BTC</h2>
-                    <div>
-                      <p>In a nutshell, Babylon implements the following mechanisms to checkpoint itself to BTC: Introduction Baby...</p>
-                    </div>
-                  </div>
-                  <div class="categories">
-                    <ul>
-                      <li><span>Featured</span></li>
-                    </ul>
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </div>
-        </Container>
-      </section>
-
       <section
         className={
           `section section-blog-listing ${padding ? padding : ""} ${paddingRemover ? paddingRemover.toString().replace(",", " ") : ""
