@@ -4,15 +4,18 @@ export const GET_POSTS_BY_CATEGORY = gql`
   query GET_POSTS_BY_CATEGORY(
     $filterCats: Int!
     $field: PostObjectsConnectionOrderbyEnum!
-    $pageSize: Int!
-    $pageOffset: Int!
+    $first: Int!, 
+    $after: String
+    $pageSearch: String!
   ) {
     posts(
       where: {
         categoryId: $filterCats
         orderby: { field: $field, order: DESC, metaKeyField: "is_featured" }
-        offsetPagination: { offset: $pageOffset, size: $pageSize }
+        search: $pageSearch 
       }
+      first: $first
+      after: $after 
     ) {
       edges {
         node {
@@ -48,6 +51,8 @@ export const GET_POSTS_BY_CATEGORY = gql`
         offsetPagination {
           total
         }
+        hasNextPage
+        endCursor
       }
     }
   }

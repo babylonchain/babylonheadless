@@ -1,9 +1,97 @@
-.section-page-title{
-    padding: 45px 0 10px;
-    border-bottom: 1px solid #E0E0E0;
-    .h2 {
-        letter-spacing: -0.01em;
-        line-height: 56px;
-        
+.section-page-title {
+  padding: 45px 0 10px;
+  border-bottom: 1px solid #E0E0E0;
+
+  .h2 {
+    letter-spacing: -0.01em;
+    line-height: 56px;
+  }
+
+  &.post-single {
+    padding: 32px 0 44px;
+    border: 0;
+
+    .container {
+      @include breakpointMax(sm) {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
     }
+
+    .page-title-wrap {
+      padding: 20px;
+      border-radius: 24px;
+      box-shadow: -2px 10px 50px rgba(94, 94, 118, 0.12);
+
+      @include breakpoint(md) {
+        padding: 40px;
+      }
+    }
+
+    .page-title {
+      @include breakpoint(lg) {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-right: 12px;
+      }
+
+      .categories {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+
+        span {
+          display: inline-block;
+          line-height: 1;
+          background-color: lighten($secondary, 50);
+          color: lighten($secondary, 15);
+          padding: 8px;
+          border-radius: 8px;
+          font-size: 14px;
+
+          &:nth-child(2n) {
+            background-color: lighten($primary, 40);
+            color: darken($primary, 10);
+          }
+        }
+      }
+
+      h1 {
+        @include breakpointMax(xl) {
+          line-height: 1.15;
+        }
+      }
+
+      .post-meta {
+        color: $light-gray;
+        margin-top: 20px;
+      }
+    }
+
+    .featured-image {
+      margin-top: 20px;
+
+      @include breakpoint(lg) {
+        min-height: 320px;
+        height: 100%;
+        margin-top: 0;
+        padding-left: 12px;
+      }
+
+      span {
+        height: 100% !important;
+        width: 100% !important;
+      }
+
+      img {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover;
+        border-radius: 24px;
+      }
+    }
+  }
 }

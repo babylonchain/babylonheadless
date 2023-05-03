@@ -1,25 +1,12 @@
 import { gql } from "@apollo/client";
 import ImageFragment from "../fragments/image";
-export const GET_FEATURED_POST = gql`
-  query GET_FEATURED_POST(
-    $pageSearch: String!
-    $first: Int!
-    $after: String
-  ) {
+export const GET_RECENT_POSTS = gql`
+  query GET_POSTS($first: Int!, $notIn:[ID]!) {
     posts(
-      where: {
-        metaQuery: {
-            metaArray: [
-              {
-                key: "is_featured",
-                value: "1"
-              }
-            ]
-        },
-        search: $pageSearch 
-      }
+        where: {
+            notIn: $notIn 
+          }
       first: $first
-      after: $after
     ) {
       edges {
         node {
@@ -61,4 +48,19 @@ export const GET_FEATURED_POST = gql`
     }
   }
   ${ImageFragment}
+`;
+/**
+ * Get post slugs.
+ *
+ */
+export const GET_POST_SLUGS = gql`
+  query GET_POST_SLUGS {
+    posts: posts(first: 6) {
+      nodes {
+        uri
+        id
+        slug
+      }
+    }
+  }
 `;
