@@ -31,8 +31,7 @@ export default function FeaturedTop({ attributes, alllink }) {
   return featured ? (
     <section
       className={
-        `section featured-post ${padding ? padding : ""} ${
-          paddingRemover ? paddingRemover.toString().replace(",", " ") : ""
+        `section featured-post ${padding ? padding : ""} ${paddingRemover ? paddingRemover.toString().replace(",", " ") : ""
         }` + getClassName(align)
       }
     >
@@ -65,11 +64,11 @@ export default function FeaturedTop({ attributes, alllink }) {
                     <div className="date">{featured[0]?.post_date}</div>
                     {/* <div className="read-time">5 min read</div> */}
                   </div>
-                  <Link href={`${featured[0]?.post_slug}`}>
-                    <a>
-                      <h2 className="title">{featured[0]?.post_title}</h2>
-                    </a>
-                  </Link>
+                  <h2 className="title">
+                    <Link href={`${featured[0]?.post_slug}`}>
+                      <a>{featured[0]?.post_title}</a>
+                    </Link>
+                  </h2>
                   <div>
                     {featured[0]?.post_excerpt && (
                       <p
