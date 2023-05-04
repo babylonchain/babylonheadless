@@ -1,0 +1,115 @@
+.featured-post {
+  padding: 40px 0 20px;
+
+  @include breakpoint(md) {
+    padding: 50px 0 25px;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 12px;
+
+    @include breakpoint(md) {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    a {
+      text-decoration: none;
+      color: $gray;
+    }
+
+    &.featured {
+      font-weight: 500;
+      margin-bottom: 20px;
+
+      @include breakpoint(md) {
+        margin-bottom: 32px;
+      }
+    }
+  }
+
+  &-wrap {
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: -2px 10px 50px rgba(94, 94, 118, 0.12);
+
+    @include breakpoint(md) {
+      padding: 40px;
+    }    
+
+    .image-wrap {
+      margin-bottom: 20px;
+
+      @include breakpoint(lg) {
+        min-height: 275.5px;
+        height: 100%;
+        margin-bottom: 0;
+        padding-right: 12px;
+      }
+
+      figure,
+      span {
+        height: 100% !important;
+        width: 100% !important;
+      }
+
+      img {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover;
+        border-radius: 24px;
+      }
+    }
+
+    .info-wrap {
+      @include breakpoint(lg) {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+
+    .meta-info {
+      font-size: 12px;
+      color: $light-gray;
+      gap: 24px;
+      margin-bottom: 12px;
+    }
+
+    .categories {
+      border-top: 1px solid #dbe4ef;
+      padding-top: 16px;
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+
+        li {
+          span {
+            display: inline-block;
+            line-height: 1;
+            background-color: lighten($secondary, 50);
+            color: lighten($secondary, 15);
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 14px;
+          }
+
+          &:nth-child(2n) {
+            span {
+              background-color: lighten($primary, 40);
+              color: darken($primary, 10);
+            }
+          }
+        }
+      }
+    }
+  }
+}
