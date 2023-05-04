@@ -13,7 +13,7 @@ import { Container } from "react-bootstrap";
 const Page = ({ data }) => {
   const router = useRouter();
 
-  // console.warn(router.asPath);
+  console.log(router.asPath);
 
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running

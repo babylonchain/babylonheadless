@@ -18,6 +18,16 @@ export const GET_PODCAST_SINGLE = gql`
 	    title
 	    content
 	    uri
+		featuredImage {
+			node {
+				...ImageFragment
+			}
+		}
+		terms {
+			nodes {
+				name
+			}
+		}
 	    slug
 		seo {
 			...SeoFragment
