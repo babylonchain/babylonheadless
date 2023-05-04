@@ -23,9 +23,22 @@
     .breadcrumb-item {
       font-size: 14px;
       line-height: 1.5;
+      position: relative;
+
+      &:not(.active) {
+        padding-right: 10px;
+
+        @include breakpointMax(sm) {
+          max-width: 102px;
+        }
+      }
 
       &::after {
         color: $light-gray;
+        position: absolute;
+        top: 0;
+        right: -7px;
+        padding: 0;
       }
 
       a {
@@ -33,7 +46,7 @@
       }
 
       + .breadcrumb-item {
-        padding-left: 0;
+        padding-left: 15px;
       }
 
       &.active {
