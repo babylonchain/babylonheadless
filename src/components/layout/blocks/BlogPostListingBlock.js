@@ -167,7 +167,7 @@ export default function BlogPostListingBlock({
   }
 
   useEffect(() => {
-    setFeatured("");
+    setFeatured("no");
     setActiveCat(null);
     setPostsData([]);
     setPostsDataDefault([]);
@@ -185,7 +185,7 @@ export default function BlogPostListingBlock({
       <section
         className={
           `section section-blog-listing ${padding ? padding : ""} ${paddingRemover ? paddingRemover.toString().replace(",", " ") : ""
-          }` + getClassName(align) + ' ' + postType
+          }` + getClassName(align) + ' posts'
         }
       >
         <Container>

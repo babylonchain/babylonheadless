@@ -13,7 +13,7 @@ const PostMeta = ({ data }) => {
     <div className="post-meta">
       {postDate ? <span className="date">{postDate}</span> : ""}
       {location ? <span className="location">{location}</span> : ""}
-      {authorName ? <span className="author"> | {authorName}</span> : ""}
+      {/* {authorName ? <span className="author"> | {authorName}</span> : ""} */}
     </div>
   );
 };

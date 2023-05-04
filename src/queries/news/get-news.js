@@ -1,9 +1,13 @@
 import { gql } from "@apollo/client";
 import ImageFragment from "../fragments/image";
 export const GET_NEWS = gql`
-  query GET_NEWS($pageSize: Int!, $pageOffset: Int!) {
+  query GET_NEWS($first: Int!, $after: String, $pageSearch: String) {
     posts: allNews(
-      where: { offsetPagination: { offset: $pageOffset, size: $pageSize } }
+      first: $first
+      after: $after
+      where: {
+        search: $pageSearch  
+      }
     ) {
       edges {
         node {
@@ -39,6 +43,8 @@ export const GET_NEWS = gql`
         offsetPagination {
           total
         }
+        hasNextPage
+        endCursor
       }
     }
   }

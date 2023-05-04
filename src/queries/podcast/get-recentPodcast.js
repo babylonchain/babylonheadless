@@ -1,25 +1,12 @@
 import { gql } from "@apollo/client";
 import ImageFragment from "../fragments/image";
-export const GET_FEATURED_PODCAST = gql`
-  query GET_FEATURED_PODCAST(
-    $pageSearch: String!
-    $first: Int!
-    $after: String
-  ) {
+export const GET_RECENT_PODCASTS = gql`
+  query GET_PODCASTS($first: Int!, $notIn:[ID]!) {
     posts: allPodcasts(
-      where: {
-        metaQuery: {
-            metaArray: [
-              {
-                key: "is_featured",
-                value: "1"
-              }
-            ]
-        },
-        search: $pageSearch 
-      }
       first: $first
-      after: $after
+      where: {
+        notIn: $notIn  
+      }
     ) {
       edges {
         node {

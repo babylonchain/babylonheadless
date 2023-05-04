@@ -3,11 +3,11 @@ import Figure from "react-bootstrap/Figure";
 import { format } from "date-fns";
 import Link from "next/link";
 
-const RecentBlogs = ( {recentBlogs} ) => {
+const RecentBlogs = ( {recentBlogs, topTitle} ) => {
 
     return(
       <div className="recent-posts">
-        <span className="h4">Recent posts</span>
+        <span className="h4">Recent {topTitle && topTitle}</span>
         <div className="posts-wrap">
           { recentBlogs ?
           recentBlogs.map((blog, index)=>{
