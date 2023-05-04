@@ -17,10 +17,12 @@
   }
 
   ol.breadcrumb {
+    flex-wrap: nowrap;
     margin-bottom: 0;
 
     .breadcrumb-item {
       font-size: 14px;
+      line-height: 1.5;
 
       &::after {
         color: $light-gray;
@@ -32,6 +34,10 @@
 
       + .breadcrumb-item {
         padding-left: 0;
+      }
+
+      &.active {
+        color: $light-gray;
       }
     }
   }
