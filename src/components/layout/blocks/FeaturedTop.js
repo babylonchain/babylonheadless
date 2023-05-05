@@ -32,7 +32,8 @@ export default function FeaturedTop({ attributes, alllink }) {
   return featured ? (
     <section
       className={
-        `section featured-post ${padding ? padding : ""} ${paddingRemover ? paddingRemover.toString().replace(",", " ") : ""
+        `section featured-post ${padding ? padding : ""} ${
+          paddingRemover ? paddingRemover.toString().replace(",", " ") : ""
         }` + getClassName(align)
       }
     >
@@ -55,7 +56,7 @@ export default function FeaturedTop({ attributes, alllink }) {
                       </figure>
                     </a>
                   </Link>
-                ): (
+                ) : (
                   <Figure.Image
                     width={300}
                     height={200}
@@ -74,7 +75,11 @@ export default function FeaturedTop({ attributes, alllink }) {
                   </div>
                   <h2 className="title">
                     <Link href={`${featured[0]?.post_slug}`}>
-                      <a>{featured[0]?.post_title}</a>
+                      <a
+                        dangerouslySetInnerHTML={{
+                          __html: sanitize(featured[0]?.post_title ?? ""),
+                        }}
+                      />
                     </Link>
                   </h2>
                   <div>
