@@ -23,6 +23,7 @@ import SuggestedArticlesBlock from "../../src/components/layout/blocks/Suggested
 import { GET_RECENT_POSTS } from "../../src/queries/posts/get-recentPosts";
 import Image from "next/image";
 import Figure from "react-bootstrap/Figure";
+import { sanitize } from "../../src/utils/miscellaneous";
 
 const Post = ({ data }) => {
   const router = useRouter();
@@ -59,7 +60,13 @@ const Post = ({ data }) => {
             <Breadcrumb.Item href={listingPage ? listingPage.uri : ""}>
               Blogs
             </Breadcrumb.Item>
-            <Breadcrumb.Item active>{data.pageTitle.pageTitle}</Breadcrumb.Item>
+            <Breadcrumb.Item active>
+            <span
+                dangerouslySetInnerHTML={{
+                  __html: sanitize(data.pageTitle.pageTitle ?? ""),
+                }}
+              />
+            </Breadcrumb.Item>
           </Breadcrumb>
         </Container>
       </section>
@@ -75,7 +82,12 @@ const Post = ({ data }) => {
                         return <span key={index}>{term?.name}</span>;
                       })}
                   </div>
-                  <h1 className="h2 mb-0">{data.pageTitle.pageTitle}</h1>
+                  <h1
+                    className="h2 mb-0"
+                    dangerouslySetInnerHTML={{
+                      __html: sanitize(data.pageTitle.pageTitle ?? ""),
+                    }}
+                  />
                   <PostMeta data={data?.postMeta} />
                 </div>
               </Col>

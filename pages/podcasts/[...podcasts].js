@@ -23,6 +23,7 @@ import { useQuery } from "@apollo/client";
 import RecentBlogs from "../../src/components/blogs/post/recentBlogs";
 import SuggestedArticlesBlock from "../../src/components/layout/blocks/SuggestedArticlesBlock";
 import Image from "next/image";
+import { sanitize } from "../../src/utils/miscellaneous";
 
 const Podcasts = ({ data }) => {
   const router = useRouter();
@@ -62,7 +63,13 @@ const Podcasts = ({ data }) => {
             <Breadcrumb.Item href={listingPage ? listingPage.uri : ""}>
               Podcasts and Talks
             </Breadcrumb.Item>
-            <Breadcrumb.Item active>{data.pageTitle.pageTitle}</Breadcrumb.Item>
+            <Breadcrumb.Item active>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: sanitize(data.pageTitle.pageTitle ?? ""),
+                }}
+              />
+            </Breadcrumb.Item>
           </Breadcrumb>
         </Container>
       </section>
@@ -78,14 +85,24 @@ const Podcasts = ({ data }) => {
                         return <span key={index}>{term?.name}</span>;
                       })}
                   </div>
-                  <h1 className="h2 mb-0">{data.pageTitle.pageTitle}</h1>
+                  <h1
+                    className="h2 mb-0"
+                    dangerouslySetInnerHTML={{
+                      __html: sanitize(data.pageTitle.pageTitle ?? ""),
+                    }}
+                  />
                   <PostMeta data={data?.postMeta} />
                 </div>
               </Col>
               <Col lg={6}>
                 <div className="featured-image">
                   {fImage ? (
-                    <Image src={fImage?.mediaItemUrl} width={300} height={200} alt={fImage.alt ? fImage.alt : fImage.title }/>
+                    <Image
+                      src={fImage?.mediaItemUrl}
+                      width={300}
+                      height={200}
+                      alt={fImage.alt ? fImage.alt : fImage.title}
+                    />
                   ) : (
                     <Figure.Image
                       width={300}
@@ -115,7 +132,10 @@ const Podcasts = ({ data }) => {
             </Col>
             {recentBlogs && (
               <Col lg={4}>
-                <RecentBlogs recentBlogs={recentBlogs} topTitle="Podcasts and Talks" />
+                <RecentBlogs
+                  recentBlogs={recentBlogs}
+                  topTitle="Podcasts and Talks"
+                />
               </Col>
             )}
           </Row>
