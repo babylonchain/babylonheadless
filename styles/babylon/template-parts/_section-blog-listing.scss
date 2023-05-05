@@ -141,8 +141,12 @@
           }
 
           img {
+            height: 100% !important;
+            width: 100% !important;
+            object-fit: cover;
             border-top-right-radius: 24px;
             border-top-left-radius: 24px;
+            margin-bottom: 0;
           }
         }
 
