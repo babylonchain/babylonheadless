@@ -213,6 +213,23 @@
       .load-more-wrap {
         text-align: center;
         margin-top: 36px;
+
+        button {
+          position: relative;
+          
+          svg {
+            display: none;
+          }
+
+          &.loading-btn {
+            svg {
+              display: inline;
+              position: absolute;
+              top: 15px;
+              margin-left: 6px;
+            }
+          }
+        }
       }
     }
   }
