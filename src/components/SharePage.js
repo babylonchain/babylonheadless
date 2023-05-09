@@ -15,7 +15,7 @@ const SharePage = ({data}) => {
     return (
         <ul className="social-icons d-flex align-items-center">
             <li>
-                <Link href={`https://www.facebook.com/sharer/sharer.php?u=${origin}${data?.asPath}`}>
+                <Link href={`https://babylonchain.substack.com/`}>
                 <a><Bookmark/></a>
                 </Link>
             </li>                  

@@ -17,6 +17,16 @@ export const GET_NEWS_SINGLE = gql`
 	    id
 	    title
 	    content
+		featuredImage {
+			node {
+				...ImageFragment
+			}
+		}
+		terms {
+			nodes {
+				name
+			}
+		}
 	    slug
 	    uri
 		seo {

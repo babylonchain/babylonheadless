@@ -1,9 +1,13 @@
 import { gql } from "@apollo/client";
 import ImageFragment from "../fragments/image";
 export const GET_PODCASTS = gql`
-  query GET_PODCASTS($pageSize: Int!, $pageOffset: Int!) {
+  query GET_PODCASTS($first: Int!, $after: String, $pageSearch: String) {
     posts: allPodcasts(
-      where: { offsetPagination: { offset: $pageOffset, size: $pageSize } }
+      first: $first
+      after: $after
+      where: {
+        search: $pageSearch  
+      }
     ) {
       edges {
         node {
@@ -39,6 +43,8 @@ export const GET_PODCASTS = gql`
         offsetPagination {
           total
         }
+        hasNextPage
+        endCursor
       }
     }
   }
