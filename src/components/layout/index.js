@@ -30,6 +30,9 @@ const Layout = ({ data, children }) => {
             dangerouslySetInnerHTML={{ __html: sanitize(seo.schemaDetails) }}
           />
         ) : null}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
         {/* Global site tag (gtag.js) - Google Analytics */}
         <script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-PGGX9RT4P0"></script>
         <script
